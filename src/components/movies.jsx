@@ -1,10 +1,13 @@
 import React, { Component } from "react";
-import { getGenres } from "../services/fakeGenreService";
-import { getMovies } from "../services/fakeMovieService";
 import MoviesTable from "./moviesTable";
 import ListGroup from "./common/listGroup";
 import Pagination from "./common/pagination";
 import { paginate } from "./utils/paginate";
+import { getGenres } from "../services/fakeGenreService";
+import { getMovies } from "../services/fakeMovieService";
+import _ from "lodash";
+
+import "./css/movies.css";
 
 class Movies extends Component {
    state = {
@@ -13,6 +16,7 @@ class Movies extends Component {
       pageSize: 4,
       currentPage: 1,
       selectedGenre: "",
+      sortColumn: { path: "title", order: "asc" },
    };
 
    componentDidMount() {
@@ -41,8 +45,8 @@ class Movies extends Component {
       this.setState({ selectedGenre: genre, currentPage: 1 });
    };
 
-   handleSort = (path) => {
-      console.log(path);
+   handleSort = (sortColumn) => {
+      this.setState({ sortColumn });
    };
 
    render() {
@@ -50,6 +54,7 @@ class Movies extends Component {
          pageSize,
          currentPage,
          selectedGenre,
+         sortColumn,
          movies: allMovies,
       } = this.state;
 
@@ -58,7 +63,10 @@ class Movies extends Component {
             ? allMovies.filter((m) => m.genre._id === selectedGenre._id)
             : allMovies;
 
-      const movies = paginate(filtered, currentPage, pageSize);
+      const sorted = _.orderBy(filtered, sortColumn.path, sortColumn.order);
+
+      const movies = paginate(sorted, currentPage, pageSize);
+
       let { length: count } = filtered;
 
       if (count === 0) return <p>There are no movies in the database</p>;
@@ -77,6 +85,8 @@ class Movies extends Component {
                <MoviesTable
                   movies={movies}
                   onLike={this.handleLike}
+                  onSort={this.handleSort}
+                  sortColumn={sortColumn}
                   onDelete={this.handleDelete}
                />
                <Pagination
