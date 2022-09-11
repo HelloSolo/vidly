@@ -7,8 +7,6 @@ import { getGenres } from "../services/fakeGenreService";
 import { getMovies } from "../services/fakeMovieService";
 import _ from "lodash";
 
-import "./css/movies.css";
-
 class Movies extends Component {
    state = {
       movies: [],

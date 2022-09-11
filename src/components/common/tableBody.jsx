@@ -12,7 +12,7 @@ class TableBody extends Component {
    };
 
    render() {
-      const { data, columns, textProperty, valueProperty } = this.props;
+      const { data, columns, valueProperty } = this.props;
       return (
          <tbody>
             {data.map((item) => (
