@@ -85,9 +85,9 @@ class Movies extends Component {
                <MoviesTable
                   movies={movies}
                   onLike={this.handleLike}
+                  onDelete={this.handleDelete}
                   onSort={this.handleSort}
                   sortColumn={sortColumn}
-                  onDelete={this.handleDelete}
                />
                <Pagination
                   onPageChange={this.handlePageChange}
