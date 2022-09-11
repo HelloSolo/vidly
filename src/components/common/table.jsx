@@ -2,9 +2,7 @@ import React from "react";
 import TableHeader from "./tableHeader";
 import TableBody from "./tableBody";
 
-const Table = (props) => {
-   const { sortColumn, onSort, columns, data } = props;
-
+const Table = ({ sortColumn, onSort, columns, data }) => {
    return (
       <table className="table">
          <TableHeader
