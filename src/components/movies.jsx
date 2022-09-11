@@ -47,7 +47,7 @@ class Movies extends Component {
       this.setState({ sortColumn });
    };
 
-   getFilteredData = () => {
+   getPagedData = () => {
       const {
          pageSize,
          currentPage,
@@ -72,7 +72,7 @@ class Movies extends Component {
       const count = this.state.movies;
       const { pageSize, currentPage, selectedGenre, sortColumn } = this.state;
 
-      const { totalCount, data: movies } = this.getFilteredData();
+      const { totalCount, data: movies } = this.getPagedData();
 
       if (count === 0) return <p>There are no movies in the database</p>;
 
