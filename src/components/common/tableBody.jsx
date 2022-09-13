@@ -12,11 +12,11 @@ class TableBody extends Component {
    };
 
    render() {
-      const { data, columns, valueProperty } = this.props;
+      const { data, columns } = this.props;
       return (
          <tbody>
             {data.map((item) => (
-               <tr key={item[valueProperty]}>
+               <tr key={item._id}>
                   {columns.map((column) => (
                      <td key={this.createKey(item, column)}>
                         {this.renderCell(item, column)}
@@ -28,10 +28,5 @@ class TableBody extends Component {
       );
    }
 }
-
-TableBody.defaultProps = {
-   textProperty: "name",
-   valueProperty: "_id",
-};
 
 export default TableBody;
