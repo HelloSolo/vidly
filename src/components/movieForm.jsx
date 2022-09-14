@@ -3,7 +3,7 @@ import Joi from "joi-browser";
 import _ from "lodash";
 import Form from "./common/form";
 import { getGenres } from "../services/fakeGenreService";
-import { saveMovie } from "../services/fakeMovieService";
+import { getMovie, saveMovie } from "../services/fakeMovieService";
 
 class MovieForm extends Form {
    state = {
@@ -13,9 +13,22 @@ class MovieForm extends Form {
    };
 
    componentDidMount() {
-      let data = { ...this.state.data };
+      const movie = getMovie(this.props.match.params._id);
       const genres = getGenres();
-      data.genre = genres[0].name;
+      let data = { ...this.state.data };
+
+      if (movie) {
+         const { title, numberInStock, dailyRentalRate } = movie;
+         data = {
+            title,
+            numberInStock,
+            dailyRentalRate,
+            genre: movie.genre.name,
+         };
+      } else {
+         data.genre = genres[0].name;
+      }
+
       this.setState({ genres, data });
    }
 
