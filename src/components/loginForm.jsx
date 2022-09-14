@@ -1,10 +1,37 @@
 import React, { Component } from "react";
+import Joi from "joi";
 import Input from "./common/input";
 
 class LoginForm extends Component {
    state = {
       account: { username: "", password: "" },
       errors: {},
+   };
+
+   schema = Joi.object({
+      username: Joi.string().required().label("Username"),
+      password: Joi.string().required().label("Password"),
+   });
+
+   validateProperty = ({ name, value }) => {
+      if (name === "username") {
+         if (value.trim() === "") return "Usrname is reqiured";
+      }
+      if (name === "password") {
+         if (value.trim() === "") return "Password is reqiured";
+      }
+      return null;
+   };
+
+   validate = () => {
+      const options = { abortEarly: false };
+      const { error } = this.schema.validate(this.state.account, options);
+
+      if (!error) return null;
+
+      const errors = {};
+      error.details.map((item) => (errors[item.path[0]] = item.message));
+      return errors;
    };
 
    handleSubmit = (e) => {
@@ -20,35 +47,13 @@ class LoginForm extends Component {
 
    handleChange = ({ currentTarget: input }) => {
       const errors = { ...this.state.errors };
-      const errorMsg = this.validate(input);
+      const errorMsg = this.validateProperty(input);
       if (errorMsg) errors[input.name] = errorMsg;
       else delete errors[input.name];
 
       const account = { ...this.state.account };
       account[input.name] = input.value;
       this.setState({ account, errors });
-   };
-
-   validate = () => {
-      const errors = {};
-
-      const { account } = this.state;
-      if (account.username.trim() === "")
-         errors.username = "Username is required";
-      if (account.password.trim() === "")
-         errors.password = "Password is required";
-
-      return Object.keys(errors).length ? errors : null;
-   };
-
-   validateProperty = ({ name, value }) => {
-      if (name === "username") {
-         if (value.trim() === "") return "Username is reqiured";
-      }
-      if (name === "password") {
-         if (value.trim() === "") return "Password is reqiured";
-      }
-      return null;
    };
 
    render() {
