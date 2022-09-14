@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Joi from "joi";
+import Joi from "joi-browser";
 import Input from "./common/input";
 
 class LoginForm extends Component {
@@ -8,19 +8,18 @@ class LoginForm extends Component {
       errors: {},
    };
 
-   schema = Joi.object({
+   validationRules = {
       username: Joi.string().required().label("Username"),
       password: Joi.string().required().label("Password"),
-   });
+   };
+
+   schema = Joi.object(this.validationRules);
 
    validateProperty = ({ name, value }) => {
-      if (name === "username") {
-         if (value.trim() === "") return "Usrname is reqiured";
-      }
-      if (name === "password") {
-         if (value.trim() === "") return "Password is reqiured";
-      }
-      return null;
+      const fieldInputData = { [name]: value };
+      const schema = Joi.object({ [name]: this.validationRules[name] });
+      const { error } = schema.validate(fieldInputData);
+      return error ? error.details[0].message : null;
    };
 
    validate = () => {
@@ -79,7 +78,11 @@ class LoginForm extends Component {
                   error={errors.password}
                />
 
-               <button type="submit" className="btn btn-primary">
+               <button
+                  type="submit"
+                  className="btn btn-primary"
+                  disabled={this.validate()}
+               >
                   Submit
                </button>
             </form>
