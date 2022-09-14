@@ -14,8 +14,6 @@ class LoginForm extends Form {
       password: Joi.string().required().label("Password"),
    };
 
-   schema = Joi.object(this.validationRules);
-
    doSubmit = () => {
       // Call to Server
       console.log("Submitted");
