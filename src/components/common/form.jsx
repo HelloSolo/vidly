@@ -5,8 +5,6 @@ import Input from "./input";
 class Form extends Component {
    state = { data: {}, errors: {} };
 
-   schema = Joi.object(this.validationRules);
-
    validateProperty = ({ name, value }) => {
       const fieldInputData = { [name]: value };
       const schema = Joi.object({ [name]: this.validationRules[name] });

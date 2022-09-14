@@ -1,6 +1,5 @@
-import React, { Component } from "react";
+import React from "react";
 import Joi from "joi-browser";
-import Input from "./common/input";
 import Form from "./common/form";
 
 class LoginForm extends Form {
@@ -13,6 +12,8 @@ class LoginForm extends Form {
       username: Joi.string().required().label("Username"),
       password: Joi.string().required().label("Password"),
    };
+
+   schema = Joi.object(this.validationRules);
 
    doSubmit = () => {
       // Call to Server
