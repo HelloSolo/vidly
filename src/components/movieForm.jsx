@@ -1,12 +1,22 @@
 import React from "react";
 import Form from "./common/form";
 import Joi from "joi-browser";
+import { getGenres } from "../services/fakeGenreService";
+import { getMovies } from "../services/fakeMovieService";
 
 class MovieForm extends Form {
    state = {
       data: { title: "", numberInStock: "", rate: "" },
       errors: {},
+      genres: [],
+      movies: [],
    };
+
+   componentDidMount() {
+      const genres = getGenres();
+      const movies = getMovies();
+      this.setState({ movies, genres });
+   }
 
    validationRules = {
       title: Joi.string().required().label("Title"),
@@ -21,6 +31,7 @@ class MovieForm extends Form {
    schema = Joi.object(this.validationRules);
 
    doSubmit = () => {
+      console.log(this.state.data);
       this.props.history.push("/movies");
    };
 
@@ -30,7 +41,7 @@ class MovieForm extends Form {
             <h1>Movie Form</h1>
             <form onSubmit={this.handleSubmit}>
                {this.renderInput("title", "Title")}
-               {/* {this.renderInput("genre", "Genre", "select")} */}
+               {this.renderSelect("genre", this.state.genres, "Genre")}
                {this.renderInput("numberInStock", "Number in Stock", "number")}
                {this.renderInput("rate", "Rate")}
                {this.renderButton("Save")}
