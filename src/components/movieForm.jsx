@@ -1,21 +1,22 @@
 import React from "react";
-import Form from "./common/form";
 import Joi from "joi-browser";
+import _ from "lodash";
+import Form from "./common/form";
 import { getGenres } from "../services/fakeGenreService";
-import { getMovies } from "../services/fakeMovieService";
+import { saveMovie } from "../services/fakeMovieService";
 
 class MovieForm extends Form {
    state = {
-      data: { title: "", numberInStock: "", rate: "", genre: "" },
+      data: { title: "", numberInStock: "", dailyRentalRate: "", genre: "" },
       errors: {},
       genres: [],
-      movies: [],
    };
 
    componentDidMount() {
+      let data = { ...this.state.data };
       const genres = getGenres();
-      const movies = getMovies();
-      this.setState({ movies, genres });
+      data.genre = genres[0].name;
+      this.setState({ genres, data });
    }
 
    validationRules = {
@@ -25,14 +26,19 @@ class MovieForm extends Form {
          .max(100)
          .required()
          .label("Number in Stock"),
-      rate: Joi.number().min(0).max(10).required().label("Rate"),
+      dailyRentalRate: Joi.number().min(0).max(10).required().label("Rate"),
       genre: Joi.string(),
    };
 
    schema = Joi.object(this.validationRules);
 
    doSubmit = () => {
-      console.log(this.state.data);
+      const { genres } = this.state;
+
+      let data = { ...this.state.data };
+      data.genre = genres[_.findIndex(genres, ["name", data.genre])];
+
+      saveMovie(data);
       this.props.history.push("/movies");
    };
 
@@ -44,7 +50,7 @@ class MovieForm extends Form {
                {this.renderInput("title", "Title")}
                {this.renderSelect("genre", this.state.genres, "Genre")}
                {this.renderInput("numberInStock", "Number in Stock", "number")}
-               {this.renderInput("rate", "Rate")}
+               {this.renderInput("dailyRentalRate", "Rate")}
                {this.renderButton("Save")}
             </form>
          </div>

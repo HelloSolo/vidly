@@ -65,11 +65,11 @@ class Form extends Component {
       );
    };
 
-   renderSelect = (name, data, label) => {
+   renderSelect = (name, options, label) => {
       return (
          <Select
             name={name}
-            data={data}
+            options={options}
             label={label}
             onSelect={this.handleSelect}
          />
