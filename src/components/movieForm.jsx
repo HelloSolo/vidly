@@ -6,7 +6,7 @@ import { getMovies } from "../services/fakeMovieService";
 
 class MovieForm extends Form {
    state = {
-      data: { title: "", numberInStock: "", rate: "" },
+      data: { title: "", numberInStock: "", rate: "", genre: "" },
       errors: {},
       genres: [],
       movies: [],
@@ -26,6 +26,7 @@ class MovieForm extends Form {
          .required()
          .label("Number in Stock"),
       rate: Joi.number().min(0).max(10).required().label("Rate"),
+      genre: Joi.string(),
    };
 
    schema = Joi.object(this.validationRules);
