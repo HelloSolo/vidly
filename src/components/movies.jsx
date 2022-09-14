@@ -6,6 +6,7 @@ import { paginate } from "./utils/paginate";
 import { getGenres } from "../services/fakeGenreService";
 import { getMovies } from "../services/fakeMovieService";
 import _ from "lodash";
+import { Link } from "react-router-dom";
 
 class Movies extends Component {
    state = {
@@ -86,6 +87,9 @@ class Movies extends Component {
                />
             </div>
             <div className="col">
+               <Link className="btn btn-primary mb-3" to="/movies/new">
+                  New Movie
+               </Link>
                <p>Showing {totalCount} movies in the database</p>
                <MoviesTable
                   movies={movies}
