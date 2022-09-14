@@ -44,7 +44,7 @@ class Form extends Component {
       this.setState({ data, errors });
    };
 
-   renderInput = (name, label, autoFocus = false) => {
+   renderInput = (name, label, type = "text") => {
       const { data: data, errors } = this.state;
       return (
          <Input
@@ -52,8 +52,8 @@ class Form extends Component {
             label={label}
             value={data[name]}
             onChange={this.handleChange}
-            autoFocus={autoFocus}
             error={errors[name]}
+            type={type}
          />
       );
    };
