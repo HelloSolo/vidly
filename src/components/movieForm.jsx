@@ -20,7 +20,7 @@ class MovieForm extends Form {
 
       if (_id !== undefined) {
          if (!movie) {
-            this.props.history.push("/not-found");
+            this.props.history.replace("/not-found");
          }
       }
 
