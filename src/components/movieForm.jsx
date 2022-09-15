@@ -2,34 +2,43 @@ import React from "react";
 import Joi from "joi-browser";
 import _ from "lodash";
 import Form from "./common/form";
-import { getGenres } from "../services/fakeGenreService";
-import { getMovie, saveMovie } from "../services/fakeMovieService";
+import { genres, getGenres } from "../services/fakeGenreService";
+import { getMovie, getMovies, saveMovie } from "../services/fakeMovieService";
 
 class MovieForm extends Form {
    state = {
       data: { title: "", numberInStock: "", dailyRentalRate: "", genre: "" },
       errors: {},
       genres: [],
+      _id: "",
    };
 
    componentDidMount() {
-      const movie = getMovie(this.props.match.params._id);
+      const _id = this.props.match.params._id;
+      const movie = getMovie(_id);
       const genres = getGenres();
+
+      if (_id !== undefined) {
+         if (!movie) {
+            this.props.history.push("/not-found");
+         }
+      }
+
       let data = { ...this.state.data };
 
       if (movie) {
-         const { title, numberInStock, dailyRentalRate } = movie;
+         const { title, numberInStock, dailyRentalRate, genre } = movie;
          data = {
             title,
             numberInStock,
             dailyRentalRate,
-            genre: movie.genre.name,
+            genre: genre.name,
          };
       } else {
          data.genre = genres[0].name;
       }
 
-      this.setState({ genres, data });
+      this.setState({ genres, data, _id });
    }
 
    validationRules = {
@@ -46,10 +55,11 @@ class MovieForm extends Form {
    schema = Joi.object(this.validationRules);
 
    doSubmit = () => {
-      const { genres } = this.state;
+      const { genres, _id } = this.state;
 
       let data = { ...this.state.data };
       data.genre = genres[_.findIndex(genres, ["name", data.genre])];
+      if (_id) data._id = _id;
 
       saveMovie(data);
       this.props.history.push("/movies");

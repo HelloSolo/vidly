@@ -45,9 +45,9 @@ class Form extends Component {
       this.setState({ data, errors });
    };
 
-   handleSelect = ({ currentTarget: input }) => {
+   handleSelect = ({ currentTarget: select }) => {
       const data = { ...this.state.data };
-      data[input.id] = input.value;
+      data[select.id] = select.value;
       this.setState({ data });
    };
 
