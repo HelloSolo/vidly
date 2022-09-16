@@ -45,12 +45,6 @@ class Form extends Component {
       this.setState({ data, errors });
    };
 
-   handleSelect = ({ currentTarget: select }) => {
-      const data = { ...this.state.data };
-      data[select.id] = select.value;
-      this.setState({ data });
-   };
-
    renderInput = (name, label, type = "text") => {
       const { data: data, errors } = this.state;
       return (
@@ -66,14 +60,15 @@ class Form extends Component {
    };
 
    renderSelect = (name, options, label) => {
-      const { data } = this.state;
+      const { data, errors } = this.state;
       return (
          <Select
             name={name}
             options={options}
-            selected={data[name]}
+            value={data[name]}
             label={label}
-            onSelect={this.handleSelect}
+            onChange={this.handleChange}
+            error={errors[name]}
          />
       );
    };
