@@ -3,26 +3,34 @@ import config from "../config.json";
 import jwtDecode from "jwt-decode";
 
 const apiEndpoint = `${config.apiEndpoint}/auth`;
+const tokenkey = "token";
+
+http.setJwt(getJwt());
 
 export async function login(email, password) {
    const { data: jwt } = await http.post(apiEndpoint, { email, password });
-   localStorage.setItem("token", jwt);
+   localStorage.setItem(tokenkey, jwt);
 }
 
 export function loginWithJWT(jwt) {
-   localStorage.setItem("token", jwt);
+   localStorage.setItem(tokenkey, jwt);
 }
 
 export function logout() {
-   localStorage.removeItem("token");
+   localStorage.removeItem(tokenkey);
 }
 
 export function getCurrentUser() {
    try {
-      const jwt = localStorage.getItem("token");
+      const jwt = localStorage.getItem(tokenkey);
       return jwtDecode(jwt);
    } catch (error) {
       return null;
    }
 }
-export default { login, loginWithJWT, logout, getCurrentUser };
+
+export function getJwt() {
+   return localStorage.getItem(tokenkey);
+}
+
+export default { login, loginWithJWT, logout, getCurrentUser, getJwt };
