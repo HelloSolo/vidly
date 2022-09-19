@@ -1,6 +1,7 @@
 import React from "react";
 import Form from "./common/form";
 import Joi from "joi-browser";
+import { register } from "../services/userService";
 
 class RegisterForm extends Form {
    state = {
@@ -16,8 +17,8 @@ class RegisterForm extends Form {
 
    schema = Joi.object(this.validationRules);
 
-   doSubmit = () => {
-      console.log("submitted");
+   doSubmit = async () => {
+      return await register(this.state.data);
    };
 
    render() {
