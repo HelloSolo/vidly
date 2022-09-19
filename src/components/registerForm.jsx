@@ -18,7 +18,15 @@ class RegisterForm extends Form {
    schema = Joi.object(this.validationRules);
 
    doSubmit = async () => {
-      return await register(this.state.data);
+      try {
+         await register(this.state.data);
+      } catch (error) {
+         if (error.response && error.response.status === 400) {
+            const errors = { ...this.state.errors };
+            errors.username = error.response.data;
+            this.setState({ errors });
+         }
+      }
    };
 
    render() {
