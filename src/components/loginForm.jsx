@@ -21,7 +21,7 @@ class LoginForm extends Form {
          const { username, password } = this.state.data;
          const { data: token } = await login(username, password);
          localStorage.setItem("token", token);
-         this.props.history.push("/");
+         window.location = "/";
       } catch (error) {
          if (error.response && error.response.status === 400) {
             const errors = { ...this.state.errors };
