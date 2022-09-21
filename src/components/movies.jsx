@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import _ from "lodash";
 import MoviesTable from "./moviesTable";
 import ListGroup from "./common/listGroup";
 import Pagination from "./common/pagination";
@@ -114,7 +115,7 @@ class Movies extends Component {
 
       return (
          <div className="row">
-            <div className="col-2">
+            <div className="col-sm-3">
                <ListGroup
                   items={this.state.genres}
                   selectedItem={selectedGenre}
