@@ -19,7 +19,7 @@ const Pagination = ({ pageSize, itemsCount, currentPage, onPageChange }) => {
                }
                key={page}
             >
-               <a className="page-link">{page}</a>
+               <span className="page-link">{page}</span>
             </li>
          ))}
       </ul>

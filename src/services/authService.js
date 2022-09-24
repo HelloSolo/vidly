@@ -33,4 +33,5 @@ export function getJwt() {
    return localStorage.getItem(tokenkey);
 }
 
-export default { login, loginWithJWT, logout, getCurrentUser, getJwt };
+const authService = { login, loginWithJWT, logout, getCurrentUser, getJwt };
+export default authService;

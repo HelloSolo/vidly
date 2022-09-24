@@ -32,7 +32,7 @@ class Movies extends Component {
    handleDelete = async (movie) => {
       const backup = [...this.state.movies];
 
-      const movies = backup.filter((m) => m._id != movie._id);
+      const movies = backup.filter((m) => m._id !== movie._id);
       this.setState({ movies });
 
       try {
