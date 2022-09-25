@@ -1,3 +1,5 @@
 {
-    "apiEndpoint": "http://localhost:8000/api"
+    "apiEndpoint": "http://localhost:8000/api",
+    "authEndpoint": "http://localhost:8000/auth/jwt/create",
+    "registerEndpoint": "http://localhost:8000/auth/users"
 }
