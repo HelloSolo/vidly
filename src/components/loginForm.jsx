@@ -24,9 +24,9 @@ class LoginForm extends Form {
          const { state } = this.props.location;
          window.location = state ? state.from.pathname : "/";
       } catch (error) {
-         if (error.response && error.response.status === 400) {
+         if (error.response && error.response.status === 401) {
             const errors = { ...this.state.errors };
-            errors.username = error.response.data;
+            errors.username = "Invalid Username or Password";
             this.setState({ errors });
          }
       }
