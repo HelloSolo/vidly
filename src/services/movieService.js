@@ -23,3 +23,7 @@ export function saveMovie(movie) {
 export function deleteMovie(movieId) {
    return http.delete(`${apiEndpoint}/${movieId}`);
 }
+
+export function getMovieImage(url) {
+   return http.get(url);
+}
