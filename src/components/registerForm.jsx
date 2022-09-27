@@ -20,8 +20,9 @@ class RegisterForm extends Form {
 
    doSubmit = async () => {
       try {
-         const response = await register(this.state.data);
-         auth.loginWithJWT(response.headers["x-auth-token"]);
+         await register(this.state.data);
+         const { username, password } = this.state.data;
+         await auth.login(username, password);
          window.location = "/";
       } catch (error) {
          if (error.response && error.response.status === 400) {
