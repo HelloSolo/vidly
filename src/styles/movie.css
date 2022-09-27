@@ -8,17 +8,25 @@
     box-sizing: border-box;
 }
 
-.poster__badge{
-    display: inline-block;
-    border-radius: 5px;
-    padding: 0.5em;
+.flex{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
 }
 
-.poster__badge--primary{
-    background-color: var(--color-primary);
-    color: #fff;
+.flex--poster{
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 1em;
+    margin-bottom: 1rem;
 }
 
+.flex--center{
+    justify-content: center;
+    align-items: center;   
+}
 
 .poster{
     font-size: 62.5%;
@@ -33,11 +41,19 @@
     flex-direction: column;
     justify-content: flex-end;
     cursor: pointer;
-    transition: filter 1s;
+    position: relative;
+    overflow: hidden;
 }
 
-.poster:hover{
-    filter: grayscale(100%);
+.poster__badge{
+    display: inline-block;
+    border-radius: 5px;
+    padding: 0.5em;
+}
+
+.poster__badge--primary{
+    background-color: var(--color-primary);
+    color: #fff;
 }
 
 .poster__title{
@@ -52,17 +68,17 @@
     font-size: 1.2em;
 }
 
-.flex{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: space-between;
-    align-items: center;
+.play{
+    width: 150px;
+    height: 230px;
+    background: rgb(126, 126, 126);
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: opacity 1s;
 }
 
-.flex--poster{
-    flex-wrap: wrap;
-    justify-content: flex-start;
-    gap: 1em;
-    margin-bottom: 1rem;
+.play:hover{
+    opacity: 0.5;
 }

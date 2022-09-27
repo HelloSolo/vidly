@@ -23,6 +23,7 @@ export default function MoviePosters({ movies }) {
                   backgroundImage: `${backgroundImage}${getImage(movie)}`,
                }}
                key={movie._id}>
+               <div className="flex flex--center play">Play</div>
                <div className="poster__title">{movie.title}</div>
                <div className="flex">
                   <div className="poster__genre">{movie.genre.name}</div>
