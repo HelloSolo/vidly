@@ -1,24 +1,22 @@
 import React, { Component } from "react";
 import _ from "lodash";
-import MoviesTable from "./moviesTable";
-import ListGroup from "./common/listGroup";
-import Pagination from "./common/pagination";
 import { paginate } from "./utils/paginate";
 import { getGenres } from "../services/genreService";
-import { getMovies, deleteMovie } from "../services/movieService";
+import { getMovies } from "../services/movieService";
 import { Link } from "react-router-dom";
 import SearchBox from "./common/searchBox";
-import { toast } from "react-toastify";
+import ListGroup from "./common/listGroup";
+import Pagination from "./common/pagination";
+import MoviePosters from "./common/moviePosters";
 
-class Movies extends Component {
+export default class Movies extends Component {
    state = {
       movies: [],
       genres: [],
-      pageSize: 4,
+      pageSize: 10,
       currentPage: 1,
       selectedGenre: null,
       searchQuery: "",
-      sortColumn: { path: "title", order: "asc" },
    };
 
    async componentDidMount() {
@@ -29,40 +27,12 @@ class Movies extends Component {
       this.setState({ movies, genres });
    }
 
-   handleDelete = async (movie) => {
-      const backup = [...this.state.movies];
-
-      const movies = backup.filter((m) => m._id !== movie._id);
-      this.setState({ movies });
-
-      try {
-         await deleteMovie(movie._id);
-      } catch (error) {
-         if (error.response && error.response.status === 404)
-            toast.error("This movie has already been deleted");
-
-         this.setState({ movies: backup });
-      }
-   };
-
-   handleLike = (movie) => {
-      const movies = [...this.state.movies];
-      const index = movies.indexOf(movie);
-      movies[index] = { ...movie };
-      movies[index].liked = !movies[index].liked;
-      this.setState({ movies });
-   };
-
    handlePageChange = (page) => {
       this.setState({ currentPage: page });
    };
 
    handleGenreSelect = (genre) => {
       this.setState({ selectedGenre: genre, currentPage: 1, searchQuery: "" });
-   };
-
-   handleSort = (sortColumn) => {
-      this.setState({ sortColumn });
    };
 
    handleSearch = (query) => {
@@ -78,7 +48,6 @@ class Movies extends Component {
          pageSize,
          currentPage,
          selectedGenre,
-         sortColumn,
          searchQuery,
          movies: allMovies,
       } = this.state;
@@ -95,17 +64,14 @@ class Movies extends Component {
          filtered = allMovies.filter((m) => m.genre._id === selectedGenre._id);
       }
 
-      const sorted = _.orderBy(filtered, sortColumn.path, sortColumn.order);
-
-      const data = paginate(sorted, currentPage, pageSize);
+      const data = paginate(filtered, currentPage, pageSize);
 
       return { totalCount: filtered.length, data };
    };
 
    render() {
       const count = this.state.movies;
-      const { pageSize, currentPage, selectedGenre, sortColumn, searchQuery } =
-         this.state;
+      const { pageSize, currentPage, selectedGenre, searchQuery } = this.state;
 
       const user = this.props.user;
 
@@ -122,6 +88,7 @@ class Movies extends Component {
                   onItemSelect={this.handleGenreSelect}
                />
             </div>
+
             <div className="col">
                {user && (
                   <Link className="btn btn-primary mb-3" to="/movies/new">
@@ -131,13 +98,8 @@ class Movies extends Component {
                <p>Showing {totalCount} movies in the database</p>
                <SearchBox onChange={this.handleSearch} value={searchQuery} />
 
-               <MoviesTable
-                  movies={movies}
-                  onLike={this.handleLike}
-                  onDelete={this.handleDelete}
-                  onSort={this.handleSort}
-                  sortColumn={sortColumn}
-               />
+               <MoviePosters movies={movies} />
+
                <Pagination
                   onPageChange={this.handlePageChange}
                   itemsCount={totalCount}
@@ -149,5 +111,3 @@ class Movies extends Component {
       );
    }
 }
-
-export default Movies;

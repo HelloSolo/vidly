@@ -14,6 +14,7 @@ import Logout from "./components/logout";
 import ProtectedRoute from "./components/common/protectedRoute";
 import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
+import "./styles/movie.css";
 
 class App extends Component {
    state = {};
