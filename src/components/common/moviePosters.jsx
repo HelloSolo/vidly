@@ -1,5 +1,4 @@
 import React from "react";
-import { getMovieImage } from "../../services/movieService";
 
 export default function MoviePosters({ movies }) {
    function getImage(movie) {
@@ -23,7 +22,11 @@ export default function MoviePosters({ movies }) {
                   backgroundImage: `${backgroundImage}${getImage(movie)}`,
                }}
                key={movie._id}>
-               <div className="flex flex--center play">Play</div>
+               <div className="flex flex--center play">
+                  <i
+                     className="fa fa-play-circle play__icon"
+                     aria-hidden="true"></i>
+               </div>
                <div className="poster__title">{movie.title}</div>
                <div className="flex">
                   <div className="poster__genre">{movie.genre.name}</div>
