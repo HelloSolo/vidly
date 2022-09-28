@@ -5,9 +5,9 @@ import { getGenres } from "../services/genreService";
 import { getMovies } from "../services/movieService";
 import { Link } from "react-router-dom";
 import SearchBox from "./common/searchBox";
-import ListGroup from "./common/listGroup";
 import Pagination from "./common/pagination";
 import MoviePosters from "./common/moviePosters";
+import Select from "./common/select";
 
 export default class Movies extends Component {
    state = {
@@ -15,7 +15,7 @@ export default class Movies extends Component {
       genres: [],
       pageSize: 10,
       currentPage: 1,
-      selectedGenre: null,
+      selectedGenre: "",
       searchQuery: "",
    };
 
@@ -31,13 +31,17 @@ export default class Movies extends Component {
       this.setState({ currentPage: page });
    };
 
-   handleGenreSelect = (genre) => {
-      this.setState({ selectedGenre: genre, currentPage: 1, searchQuery: "" });
+   handleGenreSelect = ({ currentTarget: input }) => {
+      this.setState({
+         selectedGenre: input.value,
+         currentPage: 1,
+         searchQuery: "",
+      });
    };
 
    handleSearch = (query) => {
       this.setState({
-         selectedGenre: null,
+         selectedGenre: "",
          currentPage: 1,
          searchQuery: query,
       });
@@ -60,8 +64,13 @@ export default class Movies extends Component {
                .toLowerCase()
                .includes(searchQuery.toLowerCase());
          });
-      } else if (selectedGenre && selectedGenre._id) {
-         filtered = allMovies.filter((m) => m.genre._id === selectedGenre._id);
+      } else if (selectedGenre !== "") {
+         const { genres } = this.state;
+         const index = _.findIndex(genres, ["name", selectedGenre]);
+         filtered =
+            index === 0
+               ? allMovies
+               : allMovies.filter((m) => m.genre._id === genres[index]._id);
       }
 
       const data = paginate(filtered, currentPage, pageSize);
@@ -82,10 +91,12 @@ export default class Movies extends Component {
       return (
          <div className="row">
             <div className="col-sm-3">
-               <ListGroup
-                  items={this.state.genres}
-                  selectedItem={selectedGenre}
-                  onItemSelect={this.handleGenreSelect}
+               <Select
+                  name="genres"
+                  options={this.state.genres}
+                  value={selectedGenre}
+                  placeholder="Select Genre"
+                  onChange={(e) => this.handleGenreSelect(e)}
                />
             </div>
 

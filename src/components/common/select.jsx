@@ -1,15 +1,15 @@
 import React from "react";
 
-const Select = ({ name, options, label, error, ...rest }) => {
+const Select = ({ name, options, label, error, placeholder, ...rest }) => {
    return (
       <div className="mb-3">
          <label htmlFor={name} className="form-label">
             {label}
          </label>
          <select className="form-select" id={name} name={name} {...rest}>
-            <option value="" />
+            <option value="">{placeholder}</option>
             {options.map((option) => (
-               <option key={option._id} value={option._id}>
+               <option key={option._id} value={option.name}>
                   {option.name}
                </option>
             ))}
