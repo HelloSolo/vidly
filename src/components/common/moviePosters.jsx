@@ -29,7 +29,7 @@ export default function MoviePosters({ movies }) {
                   <div className="poster__genre">{movie.genre.name}</div>
                   <div>
                      <span className="poster__badge poster__badge--primary">
-                        {`${movie.dailyRentalRate} / 10`}
+                        {`${movie.imdbRating} / 10`}
                      </span>
                   </div>
                </div>
