@@ -15,8 +15,7 @@ const NavBar = ({ user }) => {
                data-bs-target="#navbarNavAltMarkup"
                aria-controls="navbarNavAltMarkup"
                aria-expanded="false"
-               aria-label="Toggle navigation"
-            >
+               aria-label="Toggle navigation">
                <span className="navbar-toggler-icon"></span>
             </button>
             <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
@@ -24,8 +23,7 @@ const NavBar = ({ user }) => {
                   <NavLink
                      className="nav-link"
                      aria-current="page"
-                     to="/movies"
-                  >
+                     to="/movies">
                      Movies
                   </NavLink>
                   <NavLink className="nav-link" to="/customers">
@@ -47,7 +45,7 @@ const NavBar = ({ user }) => {
                   {user && (
                      <React.Fragment>
                         <NavLink className="nav-link" to="/profile">
-                           {user.name}
+                           {user.first_name}
                         </NavLink>
                         <NavLink className="nav-link" to="/logout">
                            Logout
