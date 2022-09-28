@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 
 class MovieForm extends Form {
    state = {
-      data: { title: "", numberInStock: "", imdbRating: "", genreId: "" },
+      data: { title: "", description: "", imdbRating: "", genreId: "" },
       errors: {},
       genres: [],
    };
@@ -15,11 +15,7 @@ class MovieForm extends Form {
    validationRules = {
       _id: Joi.string(),
       title: Joi.string().required().label("Title"),
-      numberInStock: Joi.number()
-         .min(0)
-         .max(100)
-         .required()
-         .label("Number in Stock"),
+      description: Joi.string().label("Description"),
       imdbRating: Joi.number().min(0).max(10).required().label("Rate"),
       genreId: Joi.string().required().label("Genre"),
    };
@@ -54,7 +50,7 @@ class MovieForm extends Form {
          _id: movie._id,
          title: movie.title,
          genreId: movie.genre._id,
-         numberInStock: movie.numberInStock,
+         description: movie.description,
          imdbRating: movie.imdbRating,
       };
    }
@@ -76,7 +72,7 @@ class MovieForm extends Form {
             <form onSubmit={this.handleSubmit}>
                {this.renderInput("title", "Title")}
                {this.renderSelect("genreId", this.state.genres, "Genre")}
-               {this.renderInput("numberInStock", "Number in Stock", "number")}
+               {this.renderInput("description", "description")}
                {this.renderInput("imdbRating", "Rate")}
                {this.renderButton("Save")}
             </form>
