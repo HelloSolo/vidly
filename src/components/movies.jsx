@@ -13,7 +13,7 @@ export default class Movies extends Component {
    state = {
       movies: [],
       genres: [],
-      pageSize: 10,
+      pageSize: 12,
       currentPage: 1,
       selectedGenre: "",
       searchQuery: "",
@@ -89,35 +89,38 @@ export default class Movies extends Component {
       if (count === 0) return <p>There are no movies in the database</p>;
 
       return (
-         <div className="row">
-            <div className="col-sm-3">
-               <Select
-                  name="genres"
-                  options={this.state.genres}
-                  value={selectedGenre}
-                  placeholder="Select Genre"
-                  onChange={(e) => this.handleGenreSelect(e)}
-               />
+         <div className="container-sm">
+            {user && (
+               <Link className="btn btn-primary mb-3" to="/movies/new">
+                  New Movie
+               </Link>
+            )}
+
+            <p>Showing {totalCount} movies in the database</p>
+
+            <div class="row">
+               <div class="col">
+                  <Select
+                     name="genres"
+                     options={this.state.genres}
+                     value={selectedGenre}
+                     placeholder="Select Genre"
+                     onChange={(e) => this.handleGenreSelect(e)}
+                  />
+               </div>
+               <div class="col">
+                  <SearchBox onChange={this.handleSearch} value={searchQuery} />
+               </div>
             </div>
 
-            <div className="col">
-               {user && (
-                  <Link className="btn btn-primary mb-3" to="/movies/new">
-                     New Movie
-                  </Link>
-               )}
-               <p>Showing {totalCount} movies in the database</p>
-               <SearchBox onChange={this.handleSearch} value={searchQuery} />
+            <MoviePosters movies={movies} />
 
-               <MoviePosters movies={movies} />
-
-               <Pagination
-                  onPageChange={this.handlePageChange}
-                  itemsCount={totalCount}
-                  pageSize={pageSize}
-                  currentPage={currentPage}
-               />
-            </div>
+            <Pagination
+               onPageChange={this.handlePageChange}
+               itemsCount={totalCount}
+               pageSize={pageSize}
+               currentPage={currentPage}
+            />
          </div>
       );
    }
