@@ -1,8 +1,16 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import getImage from "../utils/getImage";
 
 export default function MoviePosters({ movies }) {
+   function getImage(movie) {
+      try {
+         const url = movie.images[0].image;
+         return `, url(${url})`;
+      } catch (error) {
+         return "";
+      }
+   }
+
    const backgroundImage =
       "linear-gradient(180deg, rgba(252,252,252,0) 55%, rgba(0,0,0,1) 100%)";
 
@@ -12,7 +20,7 @@ export default function MoviePosters({ movies }) {
             <div
                className="poster"
                style={{
-                  backgroundImage: `${backgroundImage}${getImage(movie, 0)}`,
+                  backgroundImage: `${backgroundImage}${getImage(movie)}`,
                }}
                key={movie._id}>
                <NavLink
