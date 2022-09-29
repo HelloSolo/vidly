@@ -90,16 +90,10 @@ export default class Movies extends Component {
 
       return (
          <div className="container-sm">
-            {user && (
-               <Link className="btn btn-primary mb-3" to="/movies/new">
-                  New Movie
-               </Link>
-            )}
-
             <p>Showing {totalCount} movies in the database</p>
 
-            <div class="row">
-               <div class="col">
+            <div className="row">
+               <div className="col">
                   <Select
                      name="genres"
                      options={this.state.genres}
@@ -108,7 +102,7 @@ export default class Movies extends Component {
                      onChange={(e) => this.handleGenreSelect(e)}
                   />
                </div>
-               <div class="col">
+               <div className="col">
                   <SearchBox onChange={this.handleSearch} value={searchQuery} />
                </div>
             </div>
