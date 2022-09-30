@@ -49,8 +49,11 @@
    padding-left: 0px;
 }
 
-.poster {
+.section {
    font-size: 62.5%;
+}
+
+.poster {
    width: 150px;
    height: 230px;
    background-size: cover;
@@ -108,10 +111,6 @@
 
 .play:hover {
    opacity: 1;
-}
-
-.movie__section {
-   font-size: 62.5%;
 }
 
 .movie__cover {

@@ -18,7 +18,7 @@ export default function MoviePosters({ movies }) {
       <div className="flex flex--poster">
          {movies.map((movie) => (
             <div
-               className="poster"
+               className="section poster"
                style={{
                   backgroundImage: `${backgroundImage}${getImage(movie)}`,
                }}
