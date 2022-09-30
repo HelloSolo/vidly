@@ -1,7 +1,8 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { getImage } from "../utils/getImage";
 
-export default function MovieDescription({ movie }) {
+export default function MovieDescription({ movie, onClick }) {
    return (
       <div className="grid grid--1x2 movie__details">
          <div className="movie__banner">
@@ -29,13 +30,15 @@ export default function MovieDescription({ movie }) {
                </li>
             </ul>
 
-            <div className="btn btn-secondary">
+            <button
+               className="btn btn-secondary"
+               onClick={() => onClick(movie._id)}>
                <i className="fa fa-clock-o" aria-hidden="true"></i> Watch Later
-            </div>
+            </button>
             <p></p>
-            <div className="btn btn-primary">
+            <Link className="btn btn-primary" to="/not-found">
                <i class="fa fa-play" aria-hidden="true"></i> Watch Now
-            </div>
+            </Link>
          </div>
       </div>
    );
