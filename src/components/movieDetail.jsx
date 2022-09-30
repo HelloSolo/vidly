@@ -2,7 +2,7 @@ import React from "react";
 import Form from "./common/form";
 import { getMovie } from "../services/movieService";
 import MovieDescription from "./common/info";
-import getImage from "./utils/getImage";
+import { getBackgroundImage } from "./utils/getImage";
 
 class MovieForm extends Form {
    state = {
@@ -28,14 +28,17 @@ class MovieForm extends Form {
       const { movie } = this.state;
 
       const backgroundImage =
-         "linear-gradient(180deg, rgba(252,252,252,0) 55%, rgba(0,0,0,1) 100%), ";
+         "linear-gradient(180deg, rgba(252,252,252,0) 20%, rgba(5, 4, 16, 1) 100%), ";
 
       return (
-         <div>
+         <div className="container-xxl">
             <div
                className="movie__cover"
                style={{
-                  backgroundImage: `${backgroundImage}${getImage(movie, 1)}`,
+                  backgroundImage: `${backgroundImage}${getBackgroundImage(
+                     movie,
+                     1
+                  )}`,
                }}></div>
 
             <MovieDescription movie={movie} />

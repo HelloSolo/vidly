@@ -3,7 +3,9 @@ import { NavLink, Link } from "react-router-dom";
 
 const NavBar = ({ user }) => {
    return (
-      <nav className="navbar navbar-expand-lg bg-light">
+      <nav
+         className="navbar navbar-expand-lg bg-light"
+         style={{ "margin-bottom": "0px" }}>
          <div className="container-fluid">
             <Link className="navbar-brand fw-bold fs-3" to="/movies">
                Vidly

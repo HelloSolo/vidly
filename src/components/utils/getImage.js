@@ -1,4 +1,4 @@
-export default function getImage(movie, index) {
+function getBackgroundImage(movie, index) {
    try {
       const url = movie.images[index].image;
       return `url(${url})`;
@@ -6,3 +6,14 @@ export default function getImage(movie, index) {
       return "";
    }
 }
+
+function getImage(movie, index) {
+   try {
+      const url = movie.images[index].image;
+      return `${url}`;
+   } catch (error) {
+      return "";
+   }
+}
+
+export { getBackgroundImage, getImage };
