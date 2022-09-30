@@ -9,22 +9,30 @@ export default function MovieDescription({ movie }) {
          </div>
          <div className="movie__info">
             <ul className="list">
-               <li>{movie.title}</li>
                <li>
-                  <i className="fa fa-star-o" aria-hidden="true"></i>{" "}
-                  {movie.imdbRating}
+                  <span className="movie__title">{movie.title}</span>
                </li>
                <li>
-                  <span>Genre:</span> {}
+                  <span className="movie__rating">
+                     <i className="fa fa-star yellow" aria-hidden="true"></i>{" "}
+                     {movie.imdbRating}
+                  </span>
+                  /10
                </li>
                <li>
-                  <span>Release date:</span> {movie.releaseDate}
+                  <span className="dt">Genre:</span> {}
+               </li>
+               <li>
+                  <span className="dt">Release Date : </span>{" "}
+                  {movie.releaseDate}{" "}
+                  <i class="fa fa-calendar" aria-hidden="true"></i>
                </li>
             </ul>
 
             <div className="btn btn-secondary">
                <i className="fa fa-clock-o" aria-hidden="true"></i> Watch Later
             </div>
+            <p></p>
             <div className="btn btn-primary">
                <i class="fa fa-play" aria-hidden="true"></i> Watch Now
             </div>

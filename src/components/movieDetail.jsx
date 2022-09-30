@@ -31,7 +31,7 @@ class MovieForm extends Form {
          "linear-gradient(180deg, rgba(252,252,252,0) 20%, rgba(5, 4, 16, 1) 100%), ";
 
       return (
-         <div className="container-xxl">
+         <div className="container-xxl movie__section">
             <div
                className="movie__cover"
                style={{
@@ -44,6 +44,11 @@ class MovieForm extends Form {
             <MovieDescription movie={movie} />
 
             <div className="movie__desc">{movie.description}</div>
+
+            <div>
+               <h3>Photos</h3>
+               <div></div>
+            </div>
          </div>
       );
    }
