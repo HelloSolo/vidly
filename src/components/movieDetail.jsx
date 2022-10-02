@@ -7,6 +7,7 @@ import { getBackgroundImage } from "./utils/getImage";
 class MovieForm extends Form {
    state = {
       movie: {},
+      user: {},
    };
 
    async popuplateMovie() {
@@ -23,6 +24,10 @@ class MovieForm extends Form {
    async componentDidMount() {
       await this.popuplateMovie();
    }
+
+   handleWatchList = (movieId) => {
+      console.log(movieId);
+   };
 
    render() {
       const { movie } = this.state;
@@ -41,7 +46,7 @@ class MovieForm extends Form {
                   )}`,
                }}></div>
 
-            <MovieDescription movie={movie} />
+            <MovieDescription movie={movie} onClick={this.handleWatchList} />
 
             <div className="movie__desc">{movie.description}</div>
 
