@@ -30,6 +30,7 @@ export function logout() {
 export function getCurrentUser() {
    try {
       const jwt = localStorage.getItem(tokenkey);
+      console.log(jwtDecode(jwt));
       return jwtDecode(jwt);
    } catch (error) {
       return null;
