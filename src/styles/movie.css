@@ -204,6 +204,10 @@
    }
    .carousel--custom {
       height: 250px;
+      font-size: 0.6rem;
+   }
+   .vale {
+      height: 250px;
    }
    .carousel__image {
       width: 100%;
