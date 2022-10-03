@@ -8,7 +8,11 @@ const Select = ({ name, options, label, error, placeholder, ...rest }) => {
                {label}
             </label>
          )}
-         <select className="form-select" id={name} name={name} {...rest}>
+         <select
+            className="form-select form-control--custom"
+            id={name}
+            name={name}
+            {...rest}>
             <option value="">{placeholder}</option>
             {options.map((option) => (
                <option key={option._id} value={option.name}>

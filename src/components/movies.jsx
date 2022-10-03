@@ -97,9 +97,9 @@ export default class Movies extends Component {
                <MovieSlide movie={promoted} />
             </div>
             <div className="container-sm">
-               <p>Showing {totalCount} movies in the database</p>
+               {/* <p>Showing {totalCount} movies in the database</p> */}
                <div className="row">
-                  <div className="col">
+                  <div className="col-2">
                      <Select
                         name="genres"
                         options={this.state.genres}

@@ -189,6 +189,12 @@
    object-fit: cover;
 }
 
+.form-control--custom {
+   background-color: rgba(5, 4, 16, 1) !important;
+   border: 1px solid cadetblue !important;
+   color: #fff !important;
+}
+
 @media screen and (max-width: 768px) {
    .movie__banner {
       display: none;
