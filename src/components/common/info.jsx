@@ -37,7 +37,7 @@ export default function MovieDescription({ movie, onClick }) {
             </button>
             <p></p>
             <Link className="btn btn-primary" to="/not-found">
-               <i class="fa fa-play" aria-hidden="true"></i> Watch Now
+               <i className="fa fa-play" aria-hidden="true"></i> Watch Now
             </Link>
          </div>
       </div>
