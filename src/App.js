@@ -30,7 +30,7 @@ class App extends Component {
          <React.Fragment>
             <ToastContainer />
             <NavBar user={user} />
-            <main>
+            <main className="main">
                <Switch>
                   <Route path="/register" component={RegisterForm} />
                   <Route path="/login" component={LoginForm} />

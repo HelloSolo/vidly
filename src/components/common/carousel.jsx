@@ -29,7 +29,7 @@ export default function Carousel({ items }) {
                      alt="..."
                   />
                   <div className="vale"></div>
-                  <div className="carousel-caption d-none d-md-block">
+                  <div className="carousel-caption d-md-block">
                      <h5>{item.title}</h5>
                      <p>{item.description}</p>
                      <NavLink
