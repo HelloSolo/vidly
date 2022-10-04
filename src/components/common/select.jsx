@@ -13,7 +13,6 @@ const Select = ({ name, options, label, error, placeholder, ...rest }) => {
             id={name}
             name={name}
             {...rest}>
-            <option value="">{placeholder}</option>
             {options.map((option) => (
                <option key={option._id} value={option.name}>
                   {option.name}
