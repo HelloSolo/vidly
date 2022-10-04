@@ -3,6 +3,7 @@ import _ from "lodash";
 import { paginate } from "./utils/paginate";
 import { getGenres } from "../services/genreService";
 import { getMovies } from "../services/movieService";
+import setBackground from "./utils/setBackground";
 import SearchBox from "./common/searchBox";
 import Pagination from "./common/pagination";
 import MoviePosters from "./common/moviePosters";
@@ -83,6 +84,7 @@ export default class Movies extends Component {
    };
 
    render() {
+      setBackground("background-color: #050410; color: #eee");
       const count = this.state.movies;
       const { pageSize, currentPage, selectedGenre, searchQuery, promoted } =
          this.state;
@@ -98,22 +100,14 @@ export default class Movies extends Component {
             </div>
             <div className="container-sm">
                {/* <p>Showing {totalCount} movies in the database</p> */}
-               <div className="row">
-                  <div className="col-2">
-                     <Select
-                        name="genres"
-                        options={this.state.genres}
-                        value={selectedGenre}
-                        placeholder="Select Genre"
-                        onChange={(e) => this.handleGenreSelect(e)}
-                     />
-                  </div>
-                  <div className="col">
-                     <SearchBox
-                        onChange={this.handleSearch}
-                        value={searchQuery}
-                     />
-                  </div>
+               <div className="col-4">
+                  <Select
+                     name="genres"
+                     options={this.state.genres}
+                     value={selectedGenre}
+                     placeholder="Select Genre"
+                     onChange={(e) => this.handleGenreSelect(e)}
+                  />
                </div>
                <MoviePosters movies={movies} />
                <Pagination
