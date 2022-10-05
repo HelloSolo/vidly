@@ -1,15 +1,17 @@
 import React from "react";
 
-const Input = ({ name, label, error, ...rest }) => {
+const Input = ({ name, label, error, className, ...rest }) => {
    return (
       <div className="mb-3">
-         <label htmlFor={name} className="form-label">
-            {label}
-         </label>
+         {label && (
+            <label htmlFor={name} className="form-label">
+               {label}
+            </label>
+         )}
          <input
             type="text"
             name={name}
-            className="form-control"
+            className={className ? className : "form-control"}
             id={name}
             {...rest}
          />

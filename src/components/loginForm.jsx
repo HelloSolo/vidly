@@ -1,6 +1,7 @@
 import React from "react";
 import Joi from "joi-browser";
-import { Redirect } from "react-router-dom";
+import { NavLink, Redirect } from "react-router-dom";
+import setBackground from "./utils/setBackground";
 import auth from "../services/authService";
 import Form from "./common/form";
 
@@ -33,15 +34,25 @@ class LoginForm extends Form {
    };
 
    render() {
+      setBackground("background-color: #050410; color: #eee");
       if (auth.getCurrentUser()) return <Redirect to="/" />;
 
       return (
-         <div>
-            <h1>Login</h1>
-            <form onSubmit={this.handleSubmit}>
-               {this.renderInput("username", "Username")}
-               {this.renderInput("password", "Password", "password")}
-               {this.renderButton("Login")}
+         <div className="login-container">
+            <form onSubmit={this.handleSubmit} className="form--custom">
+               <h1>Please sign in</h1>
+               {this.renderInput("username", "", "email", "input", "Username")}
+               {this.renderInput(
+                  "password",
+                  "",
+                  "password",
+                  "input",
+                  "Password"
+               )}
+               {this.renderButton("Login", "btn-login")}
+               <p className="signin">
+                  New Here? <NavLink to="/register">Create an account</NavLink>
+               </p>
             </form>
          </div>
       );
