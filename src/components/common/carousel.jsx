@@ -11,6 +11,7 @@ export default function Carousel({ items }) {
          <div className="carousel-indicators">
             {items.map((item) => (
                <button
+                  key={item._id}
                   type="button"
                   data-bs-target="#carouselExampleCaptions"
                   data-bs-slide-to="0"
