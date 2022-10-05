@@ -21,7 +21,9 @@ const NavBar = ({ user }) => {
                aria-expanded="false"
                aria-label="Toggle navigation">
                <span>
-                  <i class="fa fa-bars nav-toggler-text" aria-hidden="true"></i>
+                  <i
+                     className="fa fa-bars nav-toggler-text"
+                     aria-hidden="true"></i>
                </span>
             </button>
             <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
