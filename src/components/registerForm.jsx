@@ -2,7 +2,9 @@ import React from "react";
 import Form from "./common/form";
 import Joi from "joi-browser";
 import auth from "../services/authService";
+import setBackground from "./utils/setBackground";
 import { register } from "../services/userService";
+import { NavLink } from "react-router-dom";
 
 class RegisterForm extends Form {
    state = {
@@ -34,13 +36,26 @@ class RegisterForm extends Form {
    };
 
    render() {
+      setBackground("background-color: #050410; color: #eee");
       return (
-         <form onSubmit={this.handleSubmit}>
-            {this.renderInput("username", "Username", "email")}
-            {this.renderInput("password", "Password", "password")}
-            {this.renderInput("name", "Name")}
-            {this.renderButton("Register")}
-         </form>
+         <div className="auth-container">
+            <form onSubmit={this.handleSubmit} className="form--custom">
+               <h1>Getting Started</h1>
+               {this.renderInput("username", "", "email", "input", "Username")}
+               {this.renderInput(
+                  "password",
+                  "",
+                  "password",
+                  "input",
+                  "Password"
+               )}
+               {this.renderInput("name", "", "", "input", "Name")}
+               {this.renderButton("Register")}
+               <p className="signin">
+                  Already have an account? <NavLink to="/login">login</NavLink>
+               </p>
+            </form>
+         </div>
       );
    }
 }
