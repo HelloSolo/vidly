@@ -23,7 +23,12 @@ class LoginForm extends Form {
          const { username, password } = this.state.data;
          await auth.login(username, password);
          const { state } = this.props.location;
-         window.location = state ? state.from.pathname : "/";
+
+         const from = localStorage.getItem("from");
+         console.log(from);
+         localStorage.removeItem("from");
+
+         window.location = state ? state.from.pathname : from ? from : "/";
       } catch (error) {
          if (error.response && error.response.status === 401) {
             const errors = { ...this.state.errors };
