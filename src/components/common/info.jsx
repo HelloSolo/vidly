@@ -26,7 +26,7 @@ export default function MovieDescription({ movie, onClick }) {
                <li>
                   <span className="dt">Release Date : </span>{" "}
                   {movie.releaseDate}{" "}
-                  <i class="fa fa-calendar" aria-hidden="true"></i>
+                  <i className="fa fa-calendar" aria-hidden="true"></i>
                </li>
             </ul>
 

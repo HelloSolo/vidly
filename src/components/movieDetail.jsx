@@ -3,11 +3,12 @@ import Form from "./common/form";
 import { getMovie } from "../services/movieService";
 import MovieDescription from "./common/info";
 import { getBackgroundImage } from "./utils/getImage";
+import setBackground from "./utils/setBackground";
 
 class MovieForm extends Form {
    state = {
       movie: {},
-      user: {},
+      customer: {},
    };
 
    async popuplateMovie() {
@@ -30,6 +31,7 @@ class MovieForm extends Form {
    };
 
    render() {
+      setBackground("background-color: #050410; color: #eee");
       const { movie } = this.state;
 
       const backgroundImage =
