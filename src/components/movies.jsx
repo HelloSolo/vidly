@@ -6,7 +6,7 @@ import { getMovies } from "../services/movieService";
 import setBackground from "./utils/setBackground";
 import SearchBox from "./common/searchBox";
 import Pagination from "./common/pagination";
-import MoviePosters from "./common/moviePosters";
+import Posters from "./common/poster";
 import Select from "./common/select";
 import MovieSlide from "./movieSlides";
 
@@ -109,7 +109,7 @@ export default class Movies extends Component {
                      onChange={(e) => this.handleGenreSelect(e)}
                   />
                </div>
-               <MoviePosters movies={movies} />
+               <Posters movies={movies} />
                <Pagination
                   onPageChange={this.handlePageChange}
                   itemsCount={totalCount}

@@ -1,7 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 
-export default function MoviePosters({ movies }) {
+export default function Posters({ movies: items }) {
    function getImage(movie) {
       try {
          const url = movie.images[0].image;
@@ -16,26 +16,26 @@ export default function MoviePosters({ movies }) {
 
    return (
       <div className="flex flex--poster">
-         {movies.map((movie) => (
+         {items.map((item) => (
             <div
                className="section poster"
                style={{
-                  backgroundImage: `${backgroundImage}${getImage(movie)}`,
+                  backgroundImage: `${backgroundImage}${getImage(item)}`,
                }}
-               key={movie._id}>
+               key={item._id}>
                <NavLink
                   className="flex flex--center play"
-                  to={`/movies/${movie._id}`}>
+                  to={`/movies/${item._id}`}>
                   <i
                      className="fa fa-play-circle play__icon"
                      aria-hidden="true"></i>
                </NavLink>
-               <div className="poster__title">{movie.title}</div>
+               <div className="poster__title">{item.title}</div>
                <div className="flex">
-                  <div className="poster__genre">{movie.genre.name}</div>
+                  <div className="poster__genre">{item.genre.name}</div>
                   <div>
                      <span className="poster__badge poster__badge--primary">
-                        {`${movie.imdbRating} / 10`}
+                        {`${item.imdbRating} / 10`}
                      </span>
                   </div>
                </div>

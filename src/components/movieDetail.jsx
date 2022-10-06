@@ -1,16 +1,19 @@
 import React, { Component } from "react";
 import _ from "lodash";
 import auth from "../services/authService";
-import { addToWatchlist, getWatchList } from "../services/userWatchlistService";
+import {
+   addMovieToWatchlist,
+   getWatchList,
+} from "../services/userWatchlistService";
 import { getMovie } from "../services/movieService";
 import { getBackgroundImage } from "./utils/getImage";
 import setBackground from "./utils/setBackground";
-import MovieDescription from "./common/info";
+import ItemDescription from "./common/itemDescription";
 
 class MovieDetail extends Component {
    state = {
       movie: {},
-      watchlist: {},
+      watchlist: [],
       disabled: false,
    };
 
@@ -19,41 +22,39 @@ class MovieDetail extends Component {
          const movieId = this.props.match.params._id;
          const { data: movie } = await getMovie(movieId);
          this.setState({ movie });
+         return movie;
       } catch (error) {
          if (error.response && error.response.status === 404)
             this.props.history.replace("/not-found");
       }
    }
 
-   async popuplateWatchlist() {
+   async populateWatchlist() {
       try {
-         const { data: watchlist } = await getWatchList();
+         const { data } = await getWatchList();
+         let watchlist = [];
+         data.forEach((element) => {
+            watchlist.push(element.movie);
+         });
          this.setState({ watchlist });
+         return watchlist;
       } catch (error) {}
    }
 
-   async componentDidMount() {
-      await this.popuplateMovie();
-      await this.popuplateWatchlist();
-      this.inWatchlist();
-   }
-
-   inWatchlist = () => {
-      const moviesInWatchList = [];
-      const { movie, watchlist } = this.state;
-
+   isMovieInWatchlist = (movie, watchlist) => {
       try {
-         watchlist.forEach((element) => {
-            moviesInWatchList.push(element.movie);
-         });
-         if (_.findIndex(moviesInWatchList, ["_id", movie._id]) > -1) {
+         if (_.findIndex(watchlist, ["_id", movie._id]) > -1) {
             this.setState({ disabled: true });
-         } else {
-            this.setState({ disabled: false });
          }
       } catch (error) {}
-      console.log(watchlist);
    };
+
+   async componentDidMount() {
+      const movie = await this.popuplateMovie();
+      const watchlist = await this.populateWatchlist();
+
+      this.isMovieInWatchlist(movie, watchlist);
+   }
 
    handleWatchList = async (movieId) => {
       if (!auth.getCurrentUser()) {
@@ -61,9 +62,9 @@ class MovieDetail extends Component {
          window.location = "/login";
          return;
       }
-      const { data: movie } = await addToWatchlist(movieId);
-      console.log(movie);
-      this.inWatchlist();
+
+      await addMovieToWatchlist(movieId);
+      this.setState({ disabled: true });
    };
 
    render() {
@@ -84,7 +85,7 @@ class MovieDetail extends Component {
                   )}`,
                }}></div>
 
-            <MovieDescription
+            <ItemDescription
                movie={movie}
                onClick={this.handleWatchList}
                disabled={this.state.disabled}

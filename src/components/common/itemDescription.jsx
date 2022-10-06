@@ -2,21 +2,21 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { getImage } from "../utils/getImage";
 
-export default function MovieDescription({ movie, onClick, disabled }) {
+export default function ItemDescription({ movie: item, onClick, disabled }) {
    return (
       <div className="grid grid--1x2 movie__details">
          <div className="movie__banner">
-            <img src={getImage(movie, 0)} className="image"></img>
+            <img src={getImage(item, 0)} className="image"></img>
          </div>
          <div className="movie__info">
             <ul className="list">
                <li>
-                  <span className="movie__title">{movie.title}</span>
+                  <span className="movie__title">{item.title}</span>
                </li>
                <li>
                   <span className="movie__rating">
                      <i className="fa fa-star yellow" aria-hidden="true"></i>{" "}
-                     {movie.imdbRating}
+                     {item.imdbRating}
                   </span>
                   /10
                </li>
@@ -24,8 +24,7 @@ export default function MovieDescription({ movie, onClick, disabled }) {
                   <span className="dt">Genre:</span> {}
                </li>
                <li>
-                  <span className="dt">Release Date : </span>{" "}
-                  {movie.releaseDate}{" "}
+                  <span className="dt">Release Date : </span> {item.releaseDate}{" "}
                   <i className="fa fa-calendar" aria-hidden="true"></i>
                </li>
             </ul>
@@ -33,7 +32,7 @@ export default function MovieDescription({ movie, onClick, disabled }) {
             <button
                className="btn btn-secondary"
                disabled={disabled}
-               onClick={async () => await onClick(movie._id)}>
+               onClick={() => onClick(item._id)}>
                {!disabled ? (
                   <i className="fa fa-clock-o" aria-hidden="true"></i>
                ) : (
