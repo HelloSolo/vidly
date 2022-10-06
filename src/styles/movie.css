@@ -221,6 +221,10 @@
    color: #fff !important;
 }
 
+.nav-link--custom:hover {
+   color: cadetblue !important;
+}
+
 .navbar-toggler--custom {
    border: none !important;
 }
