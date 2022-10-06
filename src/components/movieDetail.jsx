@@ -1,14 +1,17 @@
-import React from "react";
-import Form from "./common/form";
+import React, { Component } from "react";
+import _ from "lodash";
+import auth from "../services/authService";
+import { addToWatchlist, getWatchList } from "../services/userWatchlistService";
 import { getMovie } from "../services/movieService";
-import MovieDescription from "./common/info";
 import { getBackgroundImage } from "./utils/getImage";
 import setBackground from "./utils/setBackground";
+import MovieDescription from "./common/info";
 
-class MovieForm extends Form {
+class MovieDetail extends Component {
    state = {
       movie: {},
-      customer: {},
+      watchlist: {},
+      disabled: false,
    };
 
    async popuplateMovie() {
@@ -22,12 +25,45 @@ class MovieForm extends Form {
       }
    }
 
-   async componentDidMount() {
-      await this.popuplateMovie();
+   async popuplateWatchlist() {
+      try {
+         const { data: watchlist } = await getWatchList();
+         this.setState({ watchlist });
+      } catch (error) {}
    }
 
-   handleWatchList = (movieId) => {
-      console.log(movieId);
+   async componentDidMount() {
+      await this.popuplateMovie();
+      await this.popuplateWatchlist();
+      this.inWatchlist();
+   }
+
+   inWatchlist = () => {
+      const moviesInWatchList = [];
+      const { movie, watchlist } = this.state;
+
+      try {
+         watchlist.forEach((element) => {
+            moviesInWatchList.push(element.movie);
+         });
+         if (_.findIndex(moviesInWatchList, ["_id", movie._id]) > -1) {
+            this.setState({ disabled: true });
+         } else {
+            this.setState({ disabled: false });
+         }
+      } catch (error) {}
+      console.log(watchlist);
+   };
+
+   handleWatchList = async (movieId) => {
+      if (!auth.getCurrentUser()) {
+         localStorage.setItem("from", `/movies/${movieId}`);
+         window.location = "/login";
+         return;
+      }
+      const { data: movie } = await addToWatchlist(movieId);
+      console.log(movie);
+      this.inWatchlist();
    };
 
    render() {
@@ -48,7 +84,11 @@ class MovieForm extends Form {
                   )}`,
                }}></div>
 
-            <MovieDescription movie={movie} onClick={this.handleWatchList} />
+            <MovieDescription
+               movie={movie}
+               onClick={this.handleWatchList}
+               disabled={this.state.disabled}
+            />
 
             <div className="movie__desc">{movie.description}</div>
 
@@ -61,4 +101,4 @@ class MovieForm extends Form {
    }
 }
 
-export default MovieForm;
+export default MovieDetail;

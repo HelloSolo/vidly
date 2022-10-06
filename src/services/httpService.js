@@ -15,9 +15,12 @@ axios.interceptors.response.use(null, (error) => {
 });
 
 function setJwt(jwt) {
-   // axios.defaults.headers.common["x-auth-token"] = jwt;
    if (jwt == null) return;
    else axios.defaults.headers.common["authorization"] = `JWT ${jwt}`;
+}
+
+function setCustomHeader(header, value) {
+   axios.defaults.headers.common[header] = value;
 }
 
 const httpService = {
@@ -26,6 +29,7 @@ const httpService = {
    put: axios.put,
    delete: axios.delete,
    setJwt,
+   setCustomHeader,
 };
 
 export default httpService;

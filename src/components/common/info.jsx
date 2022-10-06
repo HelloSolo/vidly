@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { getImage } from "../utils/getImage";
 
-export default function MovieDescription({ movie, onClick }) {
+export default function MovieDescription({ movie, onClick, disabled }) {
    return (
       <div className="grid grid--1x2 movie__details">
          <div className="movie__banner">
@@ -32,8 +32,14 @@ export default function MovieDescription({ movie, onClick }) {
 
             <button
                className="btn btn-secondary"
-               onClick={() => onClick(movie._id)}>
-               <i className="fa fa-clock-o" aria-hidden="true"></i> Watch Later
+               disabled={disabled}
+               onClick={async () => await onClick(movie._id)}>
+               {!disabled ? (
+                  <i className="fa fa-clock-o" aria-hidden="true"></i>
+               ) : (
+                  <i className="fa fa-check" aria-hidden="true"></i>
+               )}{" "}
+               Watch Later
             </button>
             <p></p>
             <Link className="btn btn-primary" to="/not-found">
