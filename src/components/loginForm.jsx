@@ -1,7 +1,6 @@
 import React from "react";
 import Joi from "joi-browser";
 import { NavLink, Redirect } from "react-router-dom";
-import setBackground from "./utils/setBackground";
 import auth from "../services/authService";
 import Form from "./common/form";
 
@@ -39,7 +38,6 @@ class LoginForm extends Form {
    };
 
    render() {
-      setBackground("background-color: #050410; color: #eee");
       if (auth.getCurrentUser()) return <Redirect to="/" />;
 
       return (

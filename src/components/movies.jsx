@@ -3,7 +3,7 @@ import _ from "lodash";
 import { paginate } from "./utils/paginate";
 import { getGenres } from "../services/genreService";
 import { getMovies } from "../services/movieService";
-import setBackground from "./utils/setBackground";
+import setStyle from "./utils/setStyle";
 import SearchBox from "./common/searchBox";
 import Pagination from "./common/pagination";
 import Posters from "./common/poster";
@@ -30,6 +30,8 @@ export default class Movies extends Component {
 
       const promoted = movies.filter((movie) => movie.promoted);
       this.setState({ promoted });
+
+      setStyle(".main", "margin-top: 0");
    }
 
    handlePageChange = (page) => {
@@ -84,7 +86,6 @@ export default class Movies extends Component {
    };
 
    render() {
-      setBackground("background-color: #050410; color: #eee");
       const count = this.state.movies;
       const { pageSize, currentPage, selectedGenre, searchQuery, promoted } =
          this.state;

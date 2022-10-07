@@ -7,7 +7,6 @@ import {
 } from "../services/userWatchlistService";
 import { getMovie } from "../services/movieService";
 import { getBackgroundImage } from "./utils/getImage";
-import setBackground from "./utils/setBackground";
 import ItemDescription from "./common/itemDescription";
 
 class MovieDetail extends Component {
@@ -68,7 +67,6 @@ class MovieDetail extends Component {
    };
 
    render() {
-      setBackground("background-color: #050410; color: #eee");
       const { movie } = this.state;
 
       const backgroundImage =

@@ -2,7 +2,6 @@ import React from "react";
 import Form from "./common/form";
 import Joi from "joi-browser";
 import auth from "../services/authService";
-import setBackground from "./utils/setBackground";
 import { register } from "../services/userService";
 import { NavLink } from "react-router-dom";
 
@@ -36,7 +35,6 @@ class RegisterForm extends Form {
    };
 
    render() {
-      setBackground("background-color: #050410; color: #eee");
       return (
          <div className="auth-container">
             <form onSubmit={this.handleSubmit} className="form--custom">

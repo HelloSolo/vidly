@@ -20,6 +20,11 @@
    box-sizing: border-box;
 }
 
+body {
+   background-color: #050410 !important;
+   color: #eee !important;
+}
+
 .theme--background {
    background: linear-gradient(
       180deg,
