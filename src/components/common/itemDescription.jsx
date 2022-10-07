@@ -6,7 +6,10 @@ export default function ItemDescription({ movie: item, onClick, disabled }) {
    return (
       <div className="grid grid--1x2 movie__details">
          <div className="movie__banner">
-            <img src={getImage(item, 0)} className="image"></img>
+            <img
+               src={getImage(item, 0)}
+               className="image"
+               alt="movie_poster"></img>
          </div>
          <div className="movie__info">
             <ul className="list">
