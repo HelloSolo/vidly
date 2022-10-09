@@ -24,7 +24,6 @@ class LoginForm extends Form {
          const { state } = this.props.location;
 
          const from = localStorage.getItem("from");
-         console.log(from);
          localStorage.removeItem("from");
 
          window.location = state ? state.from.pathname : from ? from : "/";

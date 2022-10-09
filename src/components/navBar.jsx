@@ -43,11 +43,20 @@ const NavBar = ({ user, onClickSearch, onClickHome }) => {
                      onClick={() => onClickSearch()}>
                      Search
                   </NavLink>
-                  <NavLink
-                     className="nav-link nav-link--custom"
-                     to="/customers">
-                     Customers
-                  </NavLink>
+                  {user && (
+                     <NavLink
+                        className="nav-link nav-link--custom"
+                        to="/customers">
+                        Watch Later
+                     </NavLink>
+                  )}
+                  {user && (
+                     <NavLink
+                        className="nav-link nav-link--custom"
+                        to="/customers">
+                        Profile
+                     </NavLink>
+                  )}
                   {!user && (
                      <React.Fragment>
                         <NavLink
