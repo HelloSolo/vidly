@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import _ from "lodash";
 import auth from "../services/authService";
 import {
    addMovieToWatchlist,
@@ -40,7 +39,7 @@ class MovieDetail extends Component {
 
    isMovieInWatchlist = (movie, watchlist) => {
       try {
-         if (_.findIndex(watchlist, ["_id", movie._id]) > -1) {
+         if (watchlist.includes(movie._id) > -1) {
             this.setState({ disabled: true });
          }
       } catch (error) {}
