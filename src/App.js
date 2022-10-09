@@ -11,6 +11,7 @@ import MovieDetail from "./components/movieDetail";
 import LoginForm from "./components/loginForm";
 import RegisterForm from "./components/registerForm";
 import Logout from "./components/logout";
+import WatchList from "./components/watchlist";
 import ProtectedRoute from "./components/common/protectedRoute";
 import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
@@ -63,6 +64,7 @@ class App extends Component {
                      )}
                   />
                   <Route path="/customers" component={Customers} />
+                  <ProtectedRoute path="/watchlist" component={WatchList} />
                   <Route path="/rentals" component={Rentals} />
                   <Route path="/not-found" component={NotFound} />
                   <Redirect from="/" exact to="/movies" />

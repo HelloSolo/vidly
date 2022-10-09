@@ -46,7 +46,7 @@ const NavBar = ({ user, onClickSearch, onClickHome }) => {
                   {user && (
                      <NavLink
                         className="nav-link nav-link--custom"
-                        to="/customers">
+                        to="/watchlist">
                         Watch Later
                      </NavLink>
                   )}
