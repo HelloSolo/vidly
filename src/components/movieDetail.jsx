@@ -8,6 +8,7 @@ import {
 import { getMovie } from "../services/movieService";
 import { getBackgroundImage } from "./utils/getImage";
 import ItemDescription from "./common/itemDescription";
+import moveOneLevelUp from "./utils/moveALevelUp";
 
 class MovieDetail extends Component {
    state = {
@@ -31,10 +32,7 @@ class MovieDetail extends Component {
    async populateWatchlist() {
       try {
          const { data } = await getWatchList();
-         let watchlist = [];
-         data.forEach((element) => {
-            watchlist.push(element.movie);
-         });
+         const watchlist = moveOneLevelUp(data);
          this.setState({ watchlist });
          return watchlist;
       } catch (error) {}
