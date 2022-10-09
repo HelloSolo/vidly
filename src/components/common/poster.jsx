@@ -1,10 +1,10 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 
-export default function Posters({ movies: items }) {
-   function getImage(movie) {
+export default function Posters({ items }) {
+   function getImage(items) {
       try {
-         const url = movie.images[0].image;
+         const url = items.images[0].image;
          return `, url(${url})`;
       } catch (error) {
          return "";

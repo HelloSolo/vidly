@@ -123,7 +123,7 @@ export default class Movies extends Component {
                      </div>
                   )}
                </div>
-               <Posters movies={movies} />
+               <Posters items={movies} />
                <Pagination
                   onPageChange={this.handlePageChange}
                   itemsCount={totalCount}
