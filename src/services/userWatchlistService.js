@@ -11,6 +11,6 @@ export function getWatchList() {
    return http.get(apiEndpoint);
 }
 
-export function deleteMovieFromWatchlist(watchlistId) {
-   return http.delete(watchlistId);
+export function deleteMovieFromWatchlist(movieId) {
+   return http.delete(movieId);
 }
