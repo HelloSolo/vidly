@@ -1,15 +1,17 @@
 import React from "react";
 import { NavLink, Link } from "react-router-dom";
 
-const NavBar = ({ user }) => {
+const NavBar = ({ user, onClickSearch, onClickHome }) => {
    return (
       <nav
          className="navbar navbar-expand-lg navbar--custom"
-         style={{ marginBottom: "0px" }}>
+         // style={{ marginBottom: "0px" }}
+      >
          <div className="container-fluid">
             <Link
                className="navbar-brand fw-bold fs-3 nav-link--custom"
-               to="/movies">
+               to="/movies"
+               onClick={() => onClickHome()}>
                Vidly
             </Link>
             <button
@@ -31,19 +33,20 @@ const NavBar = ({ user }) => {
                   <NavLink
                      className="nav-link nav-link--custom"
                      aria-current="page"
-                     to="/movies">
+                     to="/movies"
+                     onClick={() => onClickHome()}>
                      Movies
+                  </NavLink>
+                  <NavLink
+                     className="nav-link nav-link--custom"
+                     to="/movies"
+                     onClick={() => onClickSearch()}>
+                     Search
                   </NavLink>
                   <NavLink
                      className="nav-link nav-link--custom"
                      to="/customers">
                      Customers
-                  </NavLink>
-                  <NavLink className="nav-link nav-link--custom" to="/rentals">
-                     Rentals
-                  </NavLink>
-                  <NavLink className="nav-link nav-link--custom" to="/rentals">
-                     Search
                   </NavLink>
                   {!user && (
                      <React.Fragment>

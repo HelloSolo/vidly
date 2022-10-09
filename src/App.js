@@ -18,19 +18,33 @@ import "./styles/movie.css";
 import "./styles/login&register.css";
 
 class App extends Component {
-   state = {};
+   state = { displaySearchBar: false };
 
    componentDidMount() {
       const user = auth.getCurrentUser();
-      this.setState({ user });
+      const displaySearchBar = false;
+      this.setState({ user, displaySearchBar });
    }
 
+   handleTogglingSearch = () => {
+      this.setState({ displaySearchBar: true });
+   };
+
+   handleTogglingHome = () => {
+      this.setState({ displaySearchBar: false });
+   };
+
    render() {
-      const user = this.state.user;
+      const { user, displaySearchBar } = this.state;
       return (
          <React.Fragment>
             <ToastContainer />
-            <NavBar user={user} />
+            <NavBar
+               user={user}
+               displaySearchBar={displaySearchBar}
+               onClickSearch={this.handleTogglingSearch}
+               onClickSlide={this.handleTogglingHome}
+            />
             <main className="main">
                <Switch>
                   <Route path="/register" component={RegisterForm} />
@@ -40,7 +54,13 @@ class App extends Component {
                   <Route path="/movies/:_id" component={MovieDetail} />
                   <Route
                      path="/movies"
-                     render={(props) => <Movies {...props} user={user} />}
+                     render={(props) => (
+                        <Movies
+                           {...props}
+                           user={user}
+                           displaySearchBar={displaySearchBar}
+                        />
+                     )}
                   />
                   <Route path="/customers" component={Customers} />
                   <Route path="/rentals" component={Rentals} />

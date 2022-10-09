@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import setStyle from "./utils/setStyle";
+import { setStyle } from "./utils/setStyle";
 
 const Customers = () => {
    useEffect(() => {
