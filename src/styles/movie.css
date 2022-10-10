@@ -225,6 +225,8 @@ body {
 
 .nav-link--custom {
    color: #fff !important;
+   text-decoration: none;
+   transition: color 1s;
 }
 
 .nav-link--custom:hover {

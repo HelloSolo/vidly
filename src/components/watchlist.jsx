@@ -10,6 +10,7 @@ import { getMovies } from "../services/movieService";
 import moveOneLevelUp from "./utils/moveALevelUp";
 import Thumbnail from "./common/thumbnail";
 import Table from "./common/table";
+import { NavLink } from "react-router-dom";
 
 class WatchList extends Component {
    state = { watchlist: [], movies: [] };
@@ -70,25 +71,29 @@ class WatchList extends Component {
          label: "",
          key: "movies",
          content: (movie) => (
-            <div className="d-flex thumbnail">
+            <NavLink
+               className="d-flex thumbnail nav-link--custom"
+               to={`/movies/${movie._id}`}>
                <Thumbnail item={movie} className="p-2" />
                <div className="p-2">
                   <span className="thumbnail__title">{movie.title}</span>
                   <br />
                   <span className="thumbnail__genre">{movie.genre.name}</span>
                </div>
-            </div>
+            </NavLink>
          ),
       },
 
       {
          key: "delete",
          content: (item) => (
-            <button
-               className="btn btn-danger btn-sm"
-               onClick={() => this.onDelete(item)}>
-               Delete
-            </button>
+            <React.Fragment>
+               <button
+                  className="btn btn-danger btn-sm"
+                  onClick={() => this.onDelete(item)}>
+                  Delete
+               </button>
+            </React.Fragment>
          ),
       },
    ];
