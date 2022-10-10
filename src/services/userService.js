@@ -1,7 +1,6 @@
 import http from "./httpService";
 import config from "../config.json";
 
-// const apiEndpoint = `${config.apiEndpoint}/users`;
 const apiEndpoint = `${config.registerEndpoint}/`;
 
 export function register(user) {
@@ -10,4 +9,8 @@ export function register(user) {
       password: user.password,
       name: user.name,
    });
+}
+
+export function getUser() {
+   return http.get(`${apiEndpoint}me`);
 }
