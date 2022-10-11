@@ -72,18 +72,11 @@ const NavBar = ({ user, onClickSearch, onClickHome }) => {
                      </React.Fragment>
                   )}
                   {user && (
-                     <React.Fragment>
-                        <NavLink
-                           className="nav-link nav-link--custom"
-                           to="/profile">
-                           {user.first_name}
-                        </NavLink>
-                        <NavLink
-                           className="nav-link nav-link--custom"
-                           to="/logout">
-                           Logout
-                        </NavLink>
-                     </React.Fragment>
+                     <NavLink
+                        className="nav-link nav-link--custom"
+                        to="/logout">
+                        Logout
+                     </NavLink>
                   )}
                </div>
             </div>
