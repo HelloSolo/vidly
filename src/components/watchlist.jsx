@@ -100,10 +100,11 @@ class WatchList extends Component {
 
    render() {
       const { movies } = this.state;
+      console.log(movies);
       return (
          <div className="container-sm">
             <h1>Movies</h1>
-            {!movies && <p className="fs-5">No movie in watch later</p>}
+            {movies && <p className="fs-5">No movie in watch later</p>}
             {movies && (
                <Table
                   data={movies}

@@ -4,7 +4,7 @@ import {
    addMovieToWatchlist,
    getWatchList,
 } from "../services/userWatchlistService";
-import { getMovie } from "../services/movieService";
+import { getMovie, getMovies } from "../services/movieService";
 import { getBackgroundImage } from "./utils/getImage";
 import ItemDescription from "./common/itemDescription";
 import moveOneLevelUp from "./utils/moveALevelUp";
@@ -19,8 +19,11 @@ class MovieDetail extends Component {
    async popuplateMovie() {
       try {
          const movieId = this.props.match.params._id;
+
          const { data: movie } = await getMovie(movieId);
+
          this.setState({ movie });
+
          return movie;
       } catch (error) {
          if (error.response && error.response.status === 404)
@@ -39,7 +42,7 @@ class MovieDetail extends Component {
 
    isMovieInWatchlist = (movie, watchlist) => {
       try {
-         if (watchlist.includes(movie._id) > -1) {
+         if (watchlist.includes(movie._id)) {
             this.setState({ disabled: true });
          }
       } catch (error) {}
@@ -64,7 +67,7 @@ class MovieDetail extends Component {
    };
 
    render() {
-      const { movie } = this.state;
+      const { movie, disabled } = this.state;
 
       const backgroundImage =
          "linear-gradient(180deg, rgba(252,252,252,0) 20%, rgba(5, 4, 16, 1) 100%), ";
@@ -83,7 +86,7 @@ class MovieDetail extends Component {
             <ItemDescription
                movie={movie}
                onClick={this.handleWatchList}
-               disabled={this.state.disabled}
+               disabled={disabled}
             />
 
             <div className="movie__desc">{movie.description}</div>

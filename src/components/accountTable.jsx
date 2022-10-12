@@ -19,7 +19,7 @@ export default function AccountTable({ subcription }) {
                </tr>
                <tr>
                   <td>Devices</td>
-                  <td>{subcription.devices.join(", ")}</td>
+                  <td>{subcription.devices}</td>
                </tr>
             </tbody>
          </table>

@@ -9,36 +9,34 @@ class Customer extends Component {
    state = {
       user: {},
       customer: {},
-      subscriptionDetail: {
+      subscription: {
          plan: "",
          video_quality: "",
          resolution: "",
-         devices: [],
+         devices: "",
       },
    };
 
-   async popuplateUser() {
+   async populateUser() {
       const { data: user } = await getUser();
-
       this.setState({ user });
    }
 
-   async popuplateCustomer() {
+   async populateCustomer() {
       const { data: customer } = await getCustomer();
       this.setState({ customer });
-      return customer.subscriptionDetail;
+      return customer.subscription;
    }
 
-   popuplateSubscriptionDetail(detail) {
-      console.log(detail);
-      this.setState({ subscriptionDetail: detail });
+   populateSubscription(detail) {
+      this.setState({ subscription: detail });
    }
 
    async componentDidMount() {
       setStyle();
-      await this.popuplateUser();
-      const detail = await this.popuplateCustomer();
-      this.popuplateSubscriptionDetail(detail);
+      await this.populateUser();
+      const detail = await this.populateCustomer();
+      this.populateSubscription(detail);
    }
 
    extractFirstLetter = (user) => {
@@ -50,7 +48,7 @@ class Customer extends Component {
    };
 
    render() {
-      const { user, subscriptionDetail } = this.state;
+      const { user, subscription } = this.state;
 
       return (
          <div className="container-sm">
@@ -63,7 +61,7 @@ class Customer extends Component {
             </div>
             <div className="profile__account">
                <h2>Account Type</h2>
-               <AccountTable subcription={subscriptionDetail} />
+               <AccountTable subcription={subscription} />
             </div>
 
             <NavLink to="/subscriptions" className="btn btn-primary">
