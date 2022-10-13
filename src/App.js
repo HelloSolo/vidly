@@ -65,7 +65,10 @@ class App extends Component {
                   />
                   <Route path="/customers" component={Customers} />
                   <ProtectedRoute path="/watchlist" component={WatchList} />
-                  <Route path="/subscriptions" component={Subscription} />
+                  <ProtectedRoute
+                     path="/subscriptions"
+                     component={Subscription}
+                  />
                   <Route path="/not-found" component={NotFound} />
                   <Redirect from="/" exact to="/movies" />
                   <Redirect to="/not-found" />

@@ -1,14 +1,12 @@
 import http from "./httpService";
 import config from "../config.json";
 
-const apiEndpoint = `${config.apiEndpoint}/`;
+const apiEndpoint = `${config.apiEndpoint}/customers/me`;
 
-export function updateCustomer(subscriptionType) {
-   return http.post(apiEndpoint, {
-      subscriptionType,
-   });
+export function updateCustomer(user_id, subscription) {
+   return http.put(apiEndpoint + "/", { user_id, subscription });
 }
 
 export function getCustomer() {
-   return http.get(`${apiEndpoint}customers/me`);
+   return http.get(`${apiEndpoint}`);
 }

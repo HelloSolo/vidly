@@ -274,6 +274,17 @@ body {
    font-weight: 500;
 }
 
+.box {
+   width: 100px;
+   height: 100px;
+   background: rgb(19, 8, 139);
+   display: flex;
+}
+
+.box:hover {
+   background-color: rgb(137, 132, 197);
+}
+
 @media screen and (max-width: 768px) {
    .movie__banner {
       display: none;
