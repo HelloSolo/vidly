@@ -68,7 +68,6 @@ class WatchList extends Component {
    columns = [
       {
          path: "",
-         label: "",
          key: "movies",
          content: (movie) => (
             <NavLink
@@ -100,19 +99,11 @@ class WatchList extends Component {
 
    render() {
       const { movies } = this.state;
-      console.log(movies);
       return (
          <div className="container-sm">
             <h1>Movies</h1>
-            {movies && <p className="fs-5">No movie in watch later</p>}
-            {movies && (
-               <Table
-                  data={movies}
-                  columns={this.columns}
-                  onSort={() => null}
-                  sortColumn={() => null}
-               />
-            )}
+            {movies.le && <p className="fs-5">No movie in watch later</p>}
+            {movies && <Table data={movies} columns={this.columns} />}
          </div>
       );
    }

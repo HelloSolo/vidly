@@ -63,15 +63,12 @@ export default class Subscription extends Component {
 
    handleSubscription = async (plan) => {
       const { subscriptions, customer } = this.state;
-      const subscription = _.findIndex(subscriptions, ["plan", plan]);
+      const subscription = _.findIndex(subscriptions, ["plan", plan]) + 1;
 
       try {
-         const { data } = await updateCustomer(
-            customer["user_id"],
-            subscription
-         );
+         await updateCustomer(customer["user_id"], subscription);
+         window.location = "/customers";
          toast.success("Account upgrade succesful");
-         window.location("/");
       } catch (error) {
          toast.error("Account upgrade not succesful");
       }
@@ -114,7 +111,7 @@ export default class Subscription extends Component {
          label: (
             <div
                className="box flex--center"
-               onClick={() => this.handleSubscription("premium")}>
+               onClick={() => this.handleSubscription("Premium")}>
                Premium
             </div>
          ),

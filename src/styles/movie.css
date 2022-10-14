@@ -285,6 +285,9 @@ body {
    background-color: rgb(137, 132, 197);
 }
 
+.subscription:hover {
+   color: rgb(137, 132, 197);
+}
 @media screen and (max-width: 768px) {
    .movie__banner {
       display: none;
