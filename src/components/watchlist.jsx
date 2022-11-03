@@ -102,8 +102,12 @@ class WatchList extends Component {
       return (
          <div className="container-sm">
             <h1>Movies</h1>
-            {movies.le && <p className="fs-5">No movie in watch later</p>}
-            {movies && <Table data={movies} columns={this.columns} />}
+            {movies.length == 0 && (
+               <p className="fs-5">No movie in watch later</p>
+            )}
+            {movies.length != 0 && (
+               <Table data={movies} columns={this.columns} />
+            )}
          </div>
       );
    }
