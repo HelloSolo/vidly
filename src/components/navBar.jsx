@@ -3,10 +3,7 @@ import { NavLink, Link } from "react-router-dom";
 
 const NavBar = ({ user, onClickSearch, onClickHome }) => {
    return (
-      <nav
-         className="navbar navbar-expand-lg navbar--custom"
-         // style={{ marginBottom: "0px" }}
-      >
+      <nav className="navbar navbar-expand-lg navbar--custom">
          <div className="container-fluid">
             <Link
                className="navbar-brand fw-bold fs-3 nav-link--custom"
