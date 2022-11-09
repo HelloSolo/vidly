@@ -30,6 +30,8 @@ export default class Movies extends Component {
 
       const promoted = movies.filter((movie) => movie.promoted);
       this.setState({ promoted });
+
+      setStyle("main", "margin-top: 0rem");
    }
 
    handlePageChange = (page) => {
@@ -103,7 +105,6 @@ export default class Movies extends Component {
                </div>
             )}
             <div className="container-sm">
-               {/* <p>Showing {totalCount} movies in the database</p> */}
                <div className="row">
                   <div className="col-4">
                      <Select
