@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 import { getUser } from "../services/userService";
 import { getCustomer } from "../services/customerService";
 import { setStyle } from "./utils/setStyle";
+import ProfilePicture from "./common/profilePicture";
 import AccountTable from "./accountTable";
 
 class Customer extends Component {
@@ -53,11 +54,11 @@ class Customer extends Component {
       return (
          <div className="container-sm">
             <div className="flex--center profile">
-               <div className="flex flex--center profile__photo">
-                  <span className="fs-3">{this.extractFirstLetter(user)}</span>
-               </div>
-               <div className="profile__info">{user.first_name}</div>
-               <div className="profile__info">{user.username}</div>
+               <ProfilePicture
+                  picture={this.extractFirstLetter(user)}
+                  name={user.first_name}
+                  username={user.username}
+               />
             </div>
             <div className="profile__account">
                <h2>Account Type</h2>

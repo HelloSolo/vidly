@@ -274,6 +274,11 @@ body {
    font-weight: 500;
 }
 
+.profile__info {
+   font-weight: 600 !important;
+   font-size: 1.2rem;
+}
+
 .box {
    width: 100px;
    height: 100px;
