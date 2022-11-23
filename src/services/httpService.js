@@ -14,9 +14,9 @@ axios.interceptors.response.use(null, (error) => {
    return Promise.reject(error);
 });
 
-function setJwt(jwt) {
+async function setJwt(jwt) {
    if (jwt == null) return;
-   else axios.defaults.headers.common["authorization"] = `JWT ${jwt}`;
+   axios.defaults.headers.common["authorization"] = `JWT ${jwt}`;
 }
 
 function setCustomHeader(header, value) {

@@ -2,7 +2,6 @@ import http from "./httpService";
 import config from "../config.json";
 import jwtDecode from "jwt-decode";
 
-// const apiEndpoint = `${config.apiEndpoint}/auth`;
 const apiEndpoint = `${config.authEndpoint}/`;
 const tokenkey = "token";
 
@@ -14,23 +13,20 @@ export async function login(username, password) {
       password,
    });
    const { access: jwt } = tokens;
-   localStorage.setItem(tokenkey, jwt);
-   http.setJwt(getJwt());
-   const { data: user } = await http.get(`${config.registerEndpoint}/me`);
+   sessionStorage.setItem(tokenkey, jwt);
 }
 
 export function loginWithJWT(jwt) {
-   localStorage.setItem(tokenkey, jwt);
+   sessionStorage.setItem(tokenkey, jwt);
 }
 
 export function logout() {
-   localStorage.removeItem(tokenkey);
+   sessionStorage.removeItem(tokenkey);
 }
 
 export function getCurrentUser() {
    try {
-      const jwt = localStorage.getItem(tokenkey);
-      console.log(jwtDecode(jwt));
+      const jwt = sessionStorage.getItem(tokenkey);
       return jwtDecode(jwt);
    } catch (error) {
       return null;
@@ -38,7 +34,7 @@ export function getCurrentUser() {
 }
 
 export function getJwt() {
-   return localStorage.getItem(tokenkey);
+   return sessionStorage.getItem(tokenkey);
 }
 
 const authService = {
@@ -48,4 +44,5 @@ const authService = {
    getCurrentUser,
    getJwt,
 };
+
 export default authService;
