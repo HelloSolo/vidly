@@ -9,25 +9,28 @@ export default function Carousel({ items }) {
          className="carousel slide carousel--custom"
          data-bs-ride="false">
          <div className="carousel-indicators">
-            {items.map((item) => (
+            {items.map((item, index) => (
                <button
                   key={item._id}
                   type="button"
                   data-bs-target="#carouselExampleCaptions"
-                  data-bs-slide-to="0"
-                  className="active"
-                  aria-current="true"
-                  aria-label="Slide 1"></button>
+                  data-bs-slide-to={index}
+                  aria-label={`Slide ${index + 1}`}
+                  className={index == 0 ? "active" : ""}
+                  aria-current={index == 0 ? "true" : null}></button>
             ))}
          </div>
-
-         {items.map((item) => (
-            <div className="carousel-inner" key={item._id}>
-               <div className="carousel-item active">
+         <div className="carousel-inner">
+            {items.map((item, index) => (
+               <div
+                  className={
+                     index == 0 ? "carousel-item active" : "carousel-item"
+                  }
+                  key={item._id}>
                   <img
                      src={getImage(item, item.images.length - 1)}
                      className="carousel__image"
-                     alt="..."
+                     alt={item.title}
                   />
                   <div className="vale"></div>
                   <div className="carousel-caption d-md-block">
@@ -40,9 +43,8 @@ export default function Carousel({ items }) {
                      </NavLink>
                   </div>
                </div>
-            </div>
-         ))}
-
+            ))}
+         </div>
          <button
             className="carousel-control-prev"
             type="button"
