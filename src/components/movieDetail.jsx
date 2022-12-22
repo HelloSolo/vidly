@@ -6,11 +6,14 @@ import {
 } from "../services/userWatchlistService";
 import { getMovie, getMovies } from "../services/movieService";
 import { getBackgroundImage } from "./utils/getImage";
+import MoviePoster from "./moviePoster";
 import ItemDescription from "./common/itemDescription";
 import moveOneLevelUp from "./utils/moveALevelUp";
+import _ from "lodash";
 
 class MovieDetail extends Component {
    state = {
+      similarMovies: [],
       movie: {},
       watchlist: [],
       disabled: false,
@@ -40,6 +43,25 @@ class MovieDetail extends Component {
       } catch (error) {}
    }
 
+   async populateSimilarMovies() {
+      try {
+         const { data: movies } = await getMovies();
+
+         let similarMovies = [];
+
+         movies.forEach((movie) => {
+            if (
+               movie.genre._id === this.state.movie.genre._id &&
+               movie._id !== this.state.movie._id
+            ) {
+               similarMovies.push(movie);
+            }
+         });
+
+         this.setState({ similarMovies });
+      } catch (error) {}
+   }
+
    isMovieInWatchlist = (movie, watchlist) => {
       try {
          if (watchlist.includes(movie._id)) {
@@ -51,6 +73,7 @@ class MovieDetail extends Component {
    async componentDidMount() {
       const movie = await this.popuplateMovie();
       const watchlist = await this.populateWatchlist();
+      await this.populateSimilarMovies();
 
       this.isMovieInWatchlist(movie, watchlist);
    }
@@ -89,11 +112,15 @@ class MovieDetail extends Component {
                disabled={disabled}
             />
 
-            <div className="movie__desc">{movie.description}</div>
+            <div className="movie__desc">
+               <h5 className="mt-5 mb-3 fw-bold">About this Movies</h5>
+               <p className="fs-6">{movie.description}</p>
+            </div>
 
             <div>
-               <h3>Photos</h3>
-               <div></div>
+               <h5 className="mt-5 mb-0 fw-bold">Similar Movies</h5>
+               <hr />
+               <MoviePoster movies={this.state.similarMovies} />
             </div>
          </div>
       );
