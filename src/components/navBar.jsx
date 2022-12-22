@@ -11,6 +11,7 @@ const NavBar = ({ user, onClickSearch, onClickHome }) => {
    const onClickLink = (func) => {
       let nav = document.getElementById("navbarNavAltMarkup");
       setNavBar(nav.className);
+      onClickSearch();
       if (func) {
          func();
       }

@@ -28,7 +28,8 @@ class App extends Component {
    }
 
    handleTogglingSearch = () => {
-      this.setState({ displaySearchBar: true });
+      let booleanValue = this.state.displaySearchBar ? false : true;
+      this.setState({ displaySearchBar: booleanValue });
    };
 
    handleTogglingHome = () => {
@@ -42,7 +43,6 @@ class App extends Component {
             <ToastContainer />
             <NavBar
                user={user}
-               displaySearchBar={displaySearchBar}
                onClickSearch={this.handleTogglingSearch}
                onClickSlide={this.handleTogglingHome}
             />
