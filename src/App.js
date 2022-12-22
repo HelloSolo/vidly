@@ -27,13 +27,13 @@ class App extends Component {
       this.setState({ user, displaySearchBar });
    }
 
-   handleTogglingSearch = () => {
-      let booleanValue = this.state.displaySearchBar ? false : true;
-      this.setState({ displaySearchBar: booleanValue });
-   };
-
-   handleTogglingHome = () => {
-      this.setState({ displaySearchBar: false });
+   handleTogglingSearch = (booleanValue, movieLink) => {
+      if (booleanValue === false && movieLink === true) {
+         this.setState({ displaySearchBar: booleanValue });
+      } else {
+         booleanValue = this.state.displaySearchBar ? false : true;
+         this.setState({ displaySearchBar: booleanValue });
+      }
    };
 
    render() {
@@ -41,11 +41,7 @@ class App extends Component {
       return (
          <React.Fragment>
             <ToastContainer />
-            <NavBar
-               user={user}
-               onClickSearch={this.handleTogglingSearch}
-               onClickSlide={this.handleTogglingHome}
-            />
+            <NavBar user={user} onClickSearch={this.handleTogglingSearch} />
             <main className="main">
                <Switch>
                   <Route path="/register" component={RegisterForm} />

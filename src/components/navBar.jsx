@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { NavLink, Link } from "react-router-dom";
+import { setStyle } from "./utils/setStyle";
 
 const NavBar = ({ user, onClickSearch, onClickHome }) => {
    const [navBar, setNavBar] = useState("collapse navbar-collapse");
@@ -8,12 +9,13 @@ const NavBar = ({ user, onClickSearch, onClickHome }) => {
       setNavBar("collapse navbar-collapse");
    });
 
-   const onClickLink = (func) => {
+   const onClickLink = (func, arg, argMovie) => {
       let nav = document.getElementById("navbarNavAltMarkup");
       setNavBar(nav.className);
       onClickSearch();
+      setStyle("main", "margin-top: 0rem");
       if (func) {
-         func();
+         func(arg, argMovie);
       }
       return;
    };
@@ -47,13 +49,13 @@ const NavBar = ({ user, onClickSearch, onClickHome }) => {
                      className="nav-link nav-link--custom"
                      aria-current="page"
                      to={"/movies"}
-                     onClick={() => onClickLink()}>
+                     onClick={() => onClickLink(onClickSearch, false, true)}>
                      Movies
                   </NavLink>
                   <NavLink
                      className="nav-link nav-link--custom"
                      to="/movies"
-                     onClick={() => onClickLink(onClickSearch)}>
+                     onClick={() => onClickLink(onClickSearch, true)}>
                      Search
                   </NavLink>
                   {user && (
