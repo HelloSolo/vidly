@@ -96,7 +96,7 @@ class MovieDetail extends Component {
          "linear-gradient(180deg, rgba(252,252,252,0) 20%, rgba(5, 4, 16, 1) 100%), ";
 
       return (
-         <div className="container-xxl section">
+         <div className="container-xxl section container-xxl--custom">
             <div
                className="movie__cover"
                style={{
@@ -117,7 +117,7 @@ class MovieDetail extends Component {
                <p className="fs-6">{movie.description}</p>
             </div>
 
-            <div>
+            <div className="px-2">
                <h5 className="mt-5 mb-0 fw-bold">Similar Movies</h5>
                <hr />
                <MoviePoster movies={this.state.similarMovies} />
