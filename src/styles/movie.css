@@ -231,6 +231,7 @@ body {
    color: #fff !important;
    text-decoration: none;
    transition: color 1s;
+   font-weight: 700 !important;
 }
 
 .nav-link--custom:hover {
