@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import auth from "./services/authService";
+import ProtectedRoute from "./components/common/protectedRoute";
 import NavBar from "./components/navBar";
 import Movies from "./components/movies";
 import Customers from "./components/customers";
@@ -12,11 +13,12 @@ import RegisterForm from "./components/registerForm";
 import Logout from "./components/logout";
 import WatchList from "./components/watchlist";
 import Subscription from "./components/subscription";
-import ProtectedRoute from "./components/common/protectedRoute";
+import VideoApp from "./components/videoApp";
 import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 import "./styles/movie.css";
 import "./styles/login&register.css";
+import "./styles/videoplayer.css";
 
 class App extends Component {
    state = { displaySearchBar: false };
@@ -60,6 +62,7 @@ class App extends Component {
                   />
                   <Route path="/customers" component={Customers} />
                   <ProtectedRoute path="/watchlist" component={WatchList} />
+                  <ProtectedRoute path="/player/:_id" component={VideoApp} />
                   <ProtectedRoute
                      path="/subscriptions"
                      component={Subscription}

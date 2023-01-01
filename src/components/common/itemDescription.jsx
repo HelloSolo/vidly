@@ -44,7 +44,7 @@ export default function ItemDescription({ movie: item, onClick, disabled }) {
                Watch Later
             </button>
             <p></p>
-            <Link className="btn btn-primary" to="/not-found">
+            <Link className="btn btn-primary" to={`/player/${item._id}`}>
                <i className="fa fa-play" aria-hidden="true"></i> Watch Now
             </Link>
          </div>
