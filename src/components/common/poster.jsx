@@ -1,7 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 
-export default function Posters({ item }) {
+export default function Posters({ item, onClick }) {
    function getImage(item) {
       try {
          const url = item.images[0].image;
@@ -21,7 +21,10 @@ export default function Posters({ item }) {
             backgroundImage: `${backgroundImage}${getImage(item)}`,
          }}
          key={item._id}>
-         <NavLink className="flex flex--center play" to={`/movies/${item._id}`}>
+         <NavLink
+            className="flex flex--center play"
+            to={`/movies/${item._id}`}
+            onClick={() => onClick()}>
             <i className="fa fa-play-circle play__icon" aria-hidden="true"></i>
          </NavLink>
          <div className="poster__title">{item.title}</div>

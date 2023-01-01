@@ -17,15 +17,16 @@ class MovieDetail extends Component {
       movie: {},
       watchlist: [],
       disabled: false,
+      movie_id: 0,
    };
 
    async popuplateMovie() {
       try {
-         const movieId = this.props.match.params._id;
+         const movie_id = this.props.location.pathname.slice(8);
 
-         const { data: movie } = await getMovie(movieId);
+         const { data: movie } = await getMovie(movie_id);
 
-         this.setState({ movie });
+         this.setState({ movie, movie_id });
 
          return movie;
       } catch (error) {
@@ -90,7 +91,7 @@ class MovieDetail extends Component {
    };
 
    render() {
-      const { movie, disabled } = this.state;
+      const { movie, disabled, movie_id } = this.state;
 
       const backgroundImage =
          "linear-gradient(180deg, rgba(252,252,252,0) 20%, rgba(5, 4, 16, 1) 100%), ";
@@ -113,14 +114,17 @@ class MovieDetail extends Component {
             />
 
             <div className="movie__desc">
-               <h5 className="mt-5 mb-3 fw-bold">About this Movies</h5>
+               <h5 className="mb-3 fw-bold">About this Movies</h5>
                <p className="fs-6">{movie.description}</p>
             </div>
 
             <div className="px-2">
-               <h5 className="mt-5 mb-0 fw-bold">Similar Movies</h5>
+               <h5 className="mb-0 fw-bold">Similar Movies</h5>
                <hr />
-               <MoviePoster movies={this.state.similarMovies} />
+               <MoviePoster
+                  movies={this.state.similarMovies}
+                  onClick={this.handleMovieIdUpdate}
+               />
             </div>
          </div>
       );
