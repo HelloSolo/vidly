@@ -20,6 +20,8 @@ import "./styles/movie.css";
 import "./styles/login&register.css";
 import "./styles/videoplayer.css";
 
+import "video-react/dist/video-react.css";
+
 class App extends Component {
    state = { displaySearchBar: false };
 
