@@ -22,7 +22,6 @@ class VideoApp extends Component {
    }
 
    render() {
-      console.log(this.state.source);
       return (
          <div className="video-container">
             <div className="video-wrapper">
