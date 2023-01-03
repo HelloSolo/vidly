@@ -3,9 +3,8 @@ import { getSubscriptions } from "../services/subscriptionService";
 import { getCustomer, updateCustomer } from "../services/customerService";
 import Table from "./common/table";
 import { setStyle } from "./utils/setStyle";
-import _, { random } from "lodash";
+import _ from "lodash";
 import { toast } from "react-toastify";
-import { windows } from "fontawesome";
 
 export default class Subscription extends Component {
    state = {

@@ -16,15 +16,15 @@ export default function Carousel({ items }) {
                   data-bs-target="#carouselExampleCaptions"
                   data-bs-slide-to={index}
                   aria-label={`Slide ${index + 1}`}
-                  className={index == 0 ? "active" : ""}
-                  aria-current={index == 0 ? "true" : null}></button>
+                  className={index === 0 ? "active" : ""}
+                  aria-current={index === 0 ? "true" : null}></button>
             ))}
          </div>
          <div className="carousel-inner">
             {items.map((item, index) => (
                <div
                   className={
-                     index == 0 ? "carousel-item active" : "carousel-item"
+                     index === 0 ? "carousel-item active" : "carousel-item"
                   }
                   key={item._id}>
                   <img
