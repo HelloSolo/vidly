@@ -48,11 +48,11 @@ class WatchList extends Component {
          ];
 
       const watchlist = backupWatchlist.filter(
-         (element) => element.id != watchListItem.id
+         (element) => element.id !== watchListItem.id
       );
 
       const movies = backupMovies.filter(
-         (element) => element._id != watchListItem.movie
+         (element) => element._id !== watchListItem.movie
       );
 
       this.setState({ watchlist, movies });
@@ -102,10 +102,10 @@ class WatchList extends Component {
       return (
          <div className="container-sm">
             <h1>Movies</h1>
-            {movies.length == 0 && (
+            {movies.length === 0 && (
                <p className="fs-5">No movie in watch later</p>
             )}
-            {movies.length != 0 && (
+            {movies.length !== 0 && (
                <Table data={movies} columns={this.columns} />
             )}
          </div>

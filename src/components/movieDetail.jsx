@@ -9,7 +9,6 @@ import { getBackgroundImage } from "./utils/getImage";
 import MoviePoster from "./moviePoster";
 import ItemDescription from "./common/itemDescription";
 import moveOneLevelUp from "./utils/moveALevelUp";
-import _ from "lodash";
 
 class MovieDetail extends Component {
    state = {
@@ -91,7 +90,7 @@ class MovieDetail extends Component {
    };
 
    render() {
-      const { movie, disabled, movie_id } = this.state;
+      const { movie, disabled } = this.state;
 
       const backgroundImage =
          "linear-gradient(180deg, rgba(252,252,252,0) 20%, rgba(5, 4, 16, 1) 100%), ";
