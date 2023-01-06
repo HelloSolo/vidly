@@ -1,7 +1,6 @@
 import http from "./httpService";
-import config from "../config.json";
 
-const apiEndpoint = `${config.apiEndpoint}/subscriptions`;
+const apiEndpoint = `/subscriptions`;
 
 export function getSubscriptions() {
    return http.get(apiEndpoint);

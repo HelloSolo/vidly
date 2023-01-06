@@ -1,7 +1,6 @@
 import http from "./httpService";
-import config from "../config.json";
 
-const apiEndpoint = `${config.apiEndpoint}/customers/me`;
+const apiEndpoint = `/customers/me`;
 
 export function updateCustomer(user_id, subscription) {
    return http.put(apiEndpoint + "/", { user_id, subscription });

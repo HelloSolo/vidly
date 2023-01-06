@@ -1,7 +1,6 @@
 import http from "./httpService";
-import config from "../config.json";
 
-const apiEndpoint = `${config.apiEndpoint}/watchlists`;
+const apiEndpoint = `/watchlists`;
 
 export function addMovieToWatchlist(movieId) {
    return http.post(`${apiEndpoint}/`, { movie: movieId });
