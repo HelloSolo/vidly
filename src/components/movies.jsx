@@ -86,7 +86,7 @@ export default class Movies extends Component {
    };
 
    render() {
-      const count = this.state.movies;
+      // const count = this.state.movies;
       const { pageSize, currentPage, selectedGenre, searchQuery, promoted } =
          this.state;
       const { displaySearchBar } = this.props;
@@ -95,7 +95,7 @@ export default class Movies extends Component {
 
       if (displaySearchBar) setStyle();
 
-      if (count === 0) return <p>There are no movies in the database</p>;
+      if (totalCount === 0) return <p>There are no movies in the database</p>;
 
       return (
          <React.Fragment>
