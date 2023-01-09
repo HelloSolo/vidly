@@ -24,7 +24,7 @@ export default function ItemDescription({ movie: item, onClick, disabled }) {
                   /10
                </li>
                <li>
-                  <span className="dt">Genre:</span> {}
+                  <span className="dt">Genre: {item.genre.name}</span> {}
                </li>
                <li>
                   <span className="dt">Release Date : </span> {item.releaseDate}{" "}
