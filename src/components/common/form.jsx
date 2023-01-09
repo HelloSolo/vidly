@@ -34,6 +34,12 @@ class Form extends Component {
       this.doSubmit();
    };
 
+   handleDisableButton = () => {
+      const button = document.getElementById("submit");
+
+      button.disabled = true;
+   };
+
    handleChange = ({ currentTarget: input }) => {
       const errors = { ...this.state.errors };
       const errorMsg = this.validateProperty(input);
@@ -81,12 +87,14 @@ class Form extends Component {
       );
    };
 
-   renderButton = (label, klassName = "") => {
+   renderButton = (label, klassName = "", onClick) => {
       return (
          <button
             type="submit"
+            id="submit"
             className={`btn btn-primary ${klassName}`}
-            disabled={this.validate()}>
+            disabled={this.validate()}
+            onClick={() => this.handleDisableButton()}>
             {label}
          </button>
       );

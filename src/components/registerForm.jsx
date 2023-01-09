@@ -9,6 +9,7 @@ class RegisterForm extends Form {
    state = {
       data: { username: "", password: "", name: "" },
       errors: {},
+      disable: false,
    };
 
    validationRules = {
@@ -34,12 +35,18 @@ class RegisterForm extends Form {
       }
    };
 
+   handleDisbleButton = () => {
+      const disable = this.state.disable;
+      this.setState({ disable: !disable });
+      return disable;
+   };
+
    render() {
       return (
          <div className="auth-container">
             <form onSubmit={this.handleSubmit} className="form--custom">
                <h1>Getting Started</h1>
-               {this.renderInput("username", "", "email", "input", "Username")}
+               {this.renderInput("username", "", "email", "input", "Email")}
                {this.renderInput(
                   "password",
                   "",
@@ -48,7 +55,7 @@ class RegisterForm extends Form {
                   "Password"
                )}
                {this.renderInput("name", "", "", "input", "Name")}
-               {this.renderButton("Register")}
+               {this.renderButton("Register", "", this.handleDisbleButton)}
                <p className="signin">
                   Already have an account? <NavLink to="/login">login</NavLink>
                </p>
