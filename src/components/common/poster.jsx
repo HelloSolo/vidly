@@ -14,8 +14,6 @@ export default function Posters({ item, onClick }) {
    const backgroundImage =
       "linear-gradient(180deg, rgba(252,252,252,0) 55%, rgba(0,0,0,1) 100%)";
 
-   const genre = item.genre;
-
    return (
       <div
          className="section poster"
@@ -31,7 +29,7 @@ export default function Posters({ item, onClick }) {
          </NavLink>
          <div className="poster__title">{item.title}</div>
          <div className="flex">
-            <div className="poster__genre">{genre.name}</div>
+            <div className="poster__genre">{item.genre.name}</div>
             <div>
                <span className="poster__badge poster__badge--primary">
                   {`${item.imdbRating} / 10`}
