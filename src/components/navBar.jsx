@@ -7,7 +7,7 @@ const NavBar = ({ user, onClickSearch, onClickHome }) => {
 
    useEffect(() => {
       setNavBar("collapse navbar-collapse");
-   });
+   }, [navBar]);
 
    const onClickLink = (func, arg, argMovie) => {
       let nav = document.getElementById("navbarNavAltMarkup");
