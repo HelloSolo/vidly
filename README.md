@@ -1,3 +1,9 @@
+# Description
+
+Vidly is a video stream sites similar to netflix. Users can stream browse for movies and stream videos. Vidly is a Netflix clone.
+
+![Vidly](https://asset.cloudinary.com/vidly-storage/abeb574f063eb44fe3a3df44142cfb6d)
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
