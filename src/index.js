@@ -11,8 +11,6 @@ import "bootstrap/js/dist/carousel";
 
 import { BrowserRouter } from "react-router-dom";
 
-console.log("APPNAME:", process.env);
-
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
    <BrowserRouter>
