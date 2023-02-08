@@ -9,12 +9,11 @@ class RegisterForm extends Form {
    state = {
       data: { username: "", password: "", name: "" },
       errors: {},
-      disable: false,
    };
 
    validationRules = {
       username: Joi.string().email().required().label("Username"),
-      password: Joi.string().min(5).required().label("Password"),
+      password: Joi.string().min(8).required().label("Password"),
       name: Joi.string().required().label("Name"),
    };
 
@@ -29,16 +28,18 @@ class RegisterForm extends Form {
       } catch (error) {
          if (error.response && error.response.status === 400) {
             const errors = { ...this.state.errors };
-            errors.username = error.response.data.username[0];
+
+            await error.response.data;
+
+            if ("username" in error.response.data) {
+               errors.username = error.response.data.username[0];
+            } else {
+               errors.password = error.response.data.password.join();
+            }
+
             this.setState({ errors });
          }
       }
-   };
-
-   handleDisbleButton = () => {
-      const disable = this.state.disable;
-      this.setState({ disable: !disable });
-      return disable;
    };
 
    render() {
@@ -55,7 +56,7 @@ class RegisterForm extends Form {
                   "Password"
                )}
                {this.renderInput("name", "", "", "input", "Name")}
-               {this.renderButton("Register", "", this.handleDisbleButton)}
+               {this.renderButton("Register", "")}
                <p className="signin">
                   Already have an account? <NavLink to="/login">login</NavLink>
                </p>
